@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class InputManager : MonoBehaviour {
 
 	public GameObject popUpInstance;
+	public float turnSpeed = 10f;
 	// Use this for initialization
 	void Start () {
 	
@@ -53,6 +54,9 @@ public class InputManager : MonoBehaviour {
 
 	}
 	public void GotoList(){
-
+		
+	}
+	public void Update(){
+		GameObject.Find("tissue").transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime);
 	}
 }
