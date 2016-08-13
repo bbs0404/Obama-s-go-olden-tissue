@@ -21,27 +21,8 @@ public class GameManager : SingletonBehaviour<GameManager> {
     private List<GameObject> objectList = null;
     [SerializeField]
     private List<GameObject> objectPrefabs;
-    private People[,] map {
-        get
-        {
-            return map;
-        }
-        set
-        {
-            map = value;
-        }
-    }
-    private bool[,] tissueMap
-    {
-        get
-        {
-            return tissueMap;
-        }
-        set
-        {
-            tissueMap = value;
-        }
-    }
+    private People[,] map;
+    private bool[,] tissueMap;
     private bool[,] preTissueMap;
     private State state
     {
@@ -112,6 +93,30 @@ public class GameManager : SingletonBehaviour<GameManager> {
                 }
             }
         }
+        mapUpdate();
     }
-
+    public People[,] getMap()
+    {
+        return map;
+    }
+    public void setMap(People[,] newmap)
+    {
+        map = newmap;
+    }
+    public bool[,] getTissueMap()
+    {
+        return tissueMap;
+    }
+    public void setTissueMap(bool[,] newtissuemap)
+    {
+        tissueMap = newtissuemap;
+    }
+    public State getState()
+    {
+        return state;
+    }
+    public void setState(State newState)
+    {
+        state = newState;
+    }
 }
