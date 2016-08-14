@@ -1,8 +1,12 @@
 sceneSetups:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - path: Assets/Main Scene.unity
 =======
 - path: Assets/List Scene.unity
 >>>>>>> origin/ui
+=======
+- path: Assets/temp_ui.unity
+>>>>>>> ui
   isLoaded: 1
   isActive: 1
