@@ -334,4 +334,8 @@ public class GameManager : SingletonBehaviour<GameManager> {
     {
         stage = stageNum;
     }
+    public int getStage()
+    {
+        return stage;
+    }
 }

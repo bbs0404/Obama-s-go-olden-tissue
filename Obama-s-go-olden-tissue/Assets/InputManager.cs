@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class InputManager : MonoBehaviour {
 
@@ -78,10 +80,19 @@ public class InputManager : MonoBehaviour {
 		}
 	}
 	public void ResetGame(){
-
+		SceneManager.LoadScene("Main Scene");
 	}
 	public void GotoList(){
-		//Application.LoadLevel("List Scene");
+		SceneManager.LoadScene("List Scene");
+	}
+	public void GotoNextStage(){
+		if( GameManager.Inst().getStage() == levelLimit ){
+			SceneManager.LoadScene("List Scene");
+		}
+		else{
+			GameManager.Inst().setStage(GameManager.Inst().getStage()+1);
+			SceneManager.LoadScene("Main Scene");
+		}
 	}
 
 	public void LevelLeft(){
@@ -109,7 +120,9 @@ public class InputManager : MonoBehaviour {
 				levelDoors[i].transform.Find("Text").GetComponent<Text>().text = (i+levelBase).ToString();
 				levelDoors[i].GetComponent<Image>().sprite = unlockedSprite;
 			}
-			levelDoors[i].GetComponent<Button>().onClick.AddListener(() => GoToStage(i+levelBase));
+			levelDoors[i].GetComponent<Button>().onClick.RemoveAllListeners();
+			int tempInt = i+levelBase;
+			levelDoors[i].GetComponent<Button>().onClick.AddListener(() => GoToStage(tempInt));
 		}
 		// Show the Left button or not
 		if(levelBase == 1)
@@ -123,8 +136,10 @@ public class InputManager : MonoBehaviour {
 			GameObject.Find("RightButton").GetComponent<Button>().interactable = true;
 	}
 	public void GoToStage(int idx){
+		//Debug.Log("Called " + idx.ToString());
 		if(idx>=1 && idx<=levelLimit){
-			//Application.LoadLevel("Main Scene");
+			GameManager.Inst().setStage(idx);
+			SceneManager.LoadScene("Main Scene");
 		}
 	}
 
@@ -159,7 +174,7 @@ public class InputManager : MonoBehaviour {
 				}
 			}
 		}
-		else if(GameManager.Inst().getMap()!=null){
+		else if(System.String.Compare(Application.loadedLevelName, "Main Scene", false) == 0 &&  GameManager.Inst().getMap()!=null){
 			map = GameManager.Inst().getMap();
 			mapSize = map.GetLength(0);
 			targetMapTiles = new GameObject[mapSize, mapSize];

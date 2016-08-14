@@ -1,0 +1,204 @@
+Initialize engine version: 5.4.0f3 (a6d8d714de6f)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: Intel(R) HD Graphics Family (ID=0xa16)
+    Vendor:   Intel
+    VRAM:     1115 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\jhs7j\Documents\Obama-s-go-olden-tissue\Obama-s-go-olden-tissue\wow2_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\jhs7j\Documents\Obama-s-go-olden-tissue\Obama-s-go-olden-tissue\wow2_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\jhs7j\Documents\Obama-s-go-olden-tissue\Obama-s-go-olden-tissue\wow2_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\jhs7j\Documents\Obama-s-go-olden-tissue\Obama-s-go-olden-tissue\wow2_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\jhs7j\Documents\Obama-s-go-olden-tissue\Obama-s-go-olden-tissue\wow2_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\jhs7j\Documents\Obama-s-go-olden-tissue\Obama-s-go-olden-tissue\wow2_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\jhs7j\Documents\Obama-s-go-olden-tissue\Obama-s-go-olden-tissue\wow2_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\jhs7j\Documents\Obama-s-go-olden-tissue\Obama-s-go-olden-tissue\wow2_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+- Completed reload, in  0.059 seconds
+Platform assembly: C:\Users\jhs7j\Documents\Obama-s-go-olden-tissue\Obama-s-go-olden-tissue\wow2_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\jhs7j\Documents\Obama-s-go-olden-tissue\Obama-s-go-olden-tissue\wow2_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 0.990447 ms
+Create new singleton : GameManager
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.mapUpdate () [0x00000] in <filename unknown>:0 
+  at GameManager.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.801136 ms
+
+Unloading 17 unused Assets to reduce memory usage. Loaded Objects now: 249.
+Total: 0.343406 ms (FindLiveObjects: 0.023948 ms CreateObjectMapping: 0.012401 ms MarkObjects: 0.289094 ms  DeleteObjects: 0.017106 ms)
+
+Create new singleton : GameManager
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.mapUpdate () [0x00000] in <filename unknown>:0 
+  at GameManager.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.821235 ms
+
+Unloading 19 unused Assets to reduce memory usage. Loaded Objects now: 379.
+Total: 0.527725 ms (FindLiveObjects: 0.037205 ms CreateObjectMapping: 0.026086 ms MarkObjects: 0.437490 ms  DeleteObjects: 0.026086 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.059299 ms
+
+Unloading 55 unused Assets to reduce memory usage. Loaded Objects now: 286.
+Total: 0.730433 ms (FindLiveObjects: 0.037633 ms CreateObjectMapping: 0.031218 ms MarkObjects: 0.489236 ms  DeleteObjects: 0.171489 ms)
+
+Create new singleton : GameManager
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.mapUpdate () [0x00000] in <filename unknown>:0 
+  at GameManager.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.994296 ms
+
+Unloading 19 unused Assets to reduce memory usage. Loaded Objects now: 379.
+Total: 0.580754 ms (FindLiveObjects: 0.039771 ms CreateObjectMapping: 0.031218 ms MarkObjects: 0.480683 ms  DeleteObjects: 0.028225 ms)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.672839 ms
+
+Unloading 31 unused Assets to reduce memory usage. Loaded Objects now: 379.
+Total: 1.828650 ms (FindLiveObjects: 0.108196 ms CreateObjectMapping: 0.051318 ms MarkObjects: 1.539555 ms  DeleteObjects: 0.126585 ms)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 4.309045 ms
+
+Unloading 31 unused Assets to reduce memory usage. Loaded Objects now: 379.
+Total: 1.812399 ms (FindLiveObjects: 0.116749 ms CreateObjectMapping: 0.059871 ms MarkObjects: 1.495079 ms  DeleteObjects: 0.137277 ms)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.831360 ms
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 379.
+Total: 1.803418 ms (FindLiveObjects: 0.171489 ms CreateObjectMapping: 0.086386 ms MarkObjects: 1.461722 ms  DeleteObjects: 0.078688 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.475263 ms
+
+Unloading 55 unused Assets to reduce memory usage. Loaded Objects now: 286.
+Total: 1.189306 ms (FindLiveObjects: 0.055167 ms CreateObjectMapping: 0.059016 ms MarkObjects: 0.794154 ms  DeleteObjects: 0.279685 ms)
+
+Create new singleton : GameManager
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.mapUpdate () [0x00000] in <filename unknown>:0 
+  at GameManager.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 4.285951 ms
+
+Unloading 19 unused Assets to reduce memory usage. Loaded Objects now: 379.
+Total: 2.088663 ms (FindLiveObjects: 0.135138 ms CreateObjectMapping: 0.164646 ms MarkObjects: 1.678543 ms  DeleteObjects: 0.108624 ms)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.097788 ms
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 379.
+Total: 1.718315 ms (FindLiveObjects: 0.150106 ms CreateObjectMapping: 0.064575 ms MarkObjects: 1.453597 ms  DeleteObjects: 0.043620 ms)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.857019 ms
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 379.
+Total: 1.511758 ms (FindLiveObjects: 0.192016 ms CreateObjectMapping: 0.067141 ms MarkObjects: 1.168351 ms  DeleteObjects: 0.078688 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 7.528854 ms
+
+Unloading 55 unused Assets to reduce memory usage. Loaded Objects now: 286.
+Total: 3.091085 ms (FindLiveObjects: 0.135994 ms CreateObjectMapping: 0.140270 ms MarkObjects: 2.065998 ms  DeleteObjects: 0.727012 ms)
+
+Create new singleton : GameManager
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.mapUpdate () [0x00000] in <filename unknown>:0 
+  at GameManager.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.654738 ms
+
+Unloading 19 unused Assets to reduce memory usage. Loaded Objects now: 379.
+Total: 0.550818 ms (FindLiveObjects: 0.043620 ms CreateObjectMapping: 0.038916 ms MarkObjects: 0.442194 ms  DeleteObjects: 0.025231 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.528009 ms
+
+Unloading 55 unused Assets to reduce memory usage. Loaded Objects now: 286.
+Total: 0.931003 ms (FindLiveObjects: 0.042765 ms CreateObjectMapping: 0.043193 ms MarkObjects: 0.638060 ms  DeleteObjects: 0.205701 ms)
+
+Create new singleton : GameManager
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.mapUpdate () [0x00000] in <filename unknown>:0 
+  at GameManager.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.183319 ms
+
+Unloading 19 unused Assets to reduce memory usage. Loaded Objects now: 379.
+Total: 0.993868 ms (FindLiveObjects: 0.054312 ms CreateObjectMapping: 0.053029 ms MarkObjects: 0.836919 ms  DeleteObjects: 0.047897 ms)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.904344 ms
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 379.
+Total: 0.693655 ms (FindLiveObjects: 0.045331 ms CreateObjectMapping: 0.032929 ms MarkObjects: 0.605558 ms  DeleteObjects: 0.008553 ms)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.697076 ms
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 379.
+Total: 0.479828 ms (FindLiveObjects: 0.031218 ms CreateObjectMapping: 0.022238 ms MarkObjects: 0.419528 ms  DeleteObjects: 0.005987 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.895364 ms
+
+Unloading 55 unused Assets to reduce memory usage. Loaded Objects now: 286.
+Total: 1.002849 ms (FindLiveObjects: 0.046614 ms CreateObjectMapping: 0.048324 ms MarkObjects: 0.688951 ms  DeleteObjects: 0.217676 ms)
+
+Create new singleton : GameManager
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.mapUpdate () [0x00000] in <filename unknown>:0 
+  at GameManager.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: 2f74 -> priority: 1 
