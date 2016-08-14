@@ -5,7 +5,12 @@ using UnityEngine.UI;
 public class InputManager : MonoBehaviour {
 
 	public GameObject popUpInstance;
-	public float turnSpeed = 10f;
+	//public float turnSpeed = 10.0f;
+	private float accuTime = 0.0f;
+	private bool failedFlag = false;
+	private int failedState = 0;
+	public bool successFlag = false;
+	private int successState = 0;
 	// Use this for initialization
 	void Start () {
 	
@@ -54,9 +59,116 @@ public class InputManager : MonoBehaviour {
 
 	}
 	public void GotoList(){
-		
+		Application.LoadLevel("List Scene");
 	}
 	public void Update(){
-		GameObject.Find("tissue").transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime);
+		GameObject temp = GameObject.Find("TitlePaper");
+		if(temp != null){
+			accuTime += Time.deltaTime;
+			while(accuTime > 0.6f){
+				accuTime -= 0.6f;
+			}
+			float tempScale = 1.2f - accuTime / 0.6f * 0.2f;
+			temp.transform.localScale = new Vector3(tempScale, tempScale, tempScale);
+		}
+
+		if(failedFlag){
+			accuTime += Time.deltaTime;
+			if(accuTime < 0.5){
+				Image failedBG = GameObject.Find("FailedBackground").GetComponent<Image>();
+				if(failedState == 0){
+					failedBG.enabled = true;
+					failedBG.transform.SetAsLastSibling();
+					failedState = 1;
+				}
+				failedBG.transform.position = new Vector3(640, 1260 - accuTime/0.5f * 1080f, 0);
+			}
+			else if(accuTime < 1.0){
+				Image failedTr__p = GameObject.Find("FailedTr__p").GetComponent<Image>();
+				if(failedState == 1){
+					failedTr__p.enabled = true;
+					failedTr__p.transform.SetAsLastSibling();
+					failedTr__p.transform.position = new Vector3(640, 360, 0);
+					failedState = 2;
+				}
+				Color colorTemp = failedTr__p.color;
+            	colorTemp.a = (accuTime-0.5f)*2.0f;
+            	failedTr__p.color = colorTemp;
+				if(accuTime>=0.75){
+					Image failedText = GameObject.Find("FailedText").GetComponent<Image>();
+					if(failedState == 2){
+						failedText.enabled = true;
+						failedText.transform.SetAsLastSibling();
+						failedState = 3;
+					}
+					failedText.transform.position = new Vector3(640, 1080 - (accuTime-0.75f)/0.25f * 600f, 0);
+				}
+			}
+			else if(failedState == 3){
+				GameObject failedRestart = GameObject.Find("FailedRestartButton");
+				Image failedRestartImage = failedRestart.GetComponent<Image>();
+				failedRestartImage.enabled = true;
+				failedRestartImage.transform.SetAsLastSibling();
+				failedRestartImage.transform.position = new Vector3(640, 120, 0);
+				Button failedRestartButton = failedRestart.GetComponent<Button>();
+				failedRestartButton.interactable = true;
+				failedState = 4;
+			}
+		}
+		if(successFlag){
+			GameObject tissue = GameObject.Find("tissue");
+			tissue.transform.RotateAround(tissue.transform.position, Vector3.up, 50.0f * Time.deltaTime);
+			accuTime += Time.deltaTime;
+			if(accuTime<0.2f){
+				Image successBackground = GameObject.Find("SuccessBackground").GetComponent<Image>();
+				if(successState == 0){
+					successBackground.enabled = true;
+					successBackground.transform.SetAsLastSibling();
+					successState = 1;
+				}
+				Color colorTemp = successBackground.color;
+            	colorTemp.a = (accuTime * 6.0f > 1.0f) ? 1.0f : (accuTime * 6.0f);
+            	successBackground.color = colorTemp;
+			}
+			else if(accuTime<0.5f){
+				Image successRibbon = GameObject.Find("SuccessRibbon").GetComponent<Image>();
+				if(successState == 1){
+					GameObject.Find("Canvas").SetActive(false);
+					Canvas canvasSuc = GameObject.Find("CanvasSuc").GetComponent<Canvas>();
+					canvasSuc.enabled = true;
+					successState = 2;
+				}
+				if(accuTime<0.4f){
+					tissue.transform.position = new Vector3(0, 10 - (accuTime-0.2f)/0.2f * 12, 100);
+				}
+				successRibbon.transform.position = new Vector3(640, 1080 - (accuTime-0.2f)/0.3f * 720, 100);
+			}
+			else if(successState == 2){
+				GameObject successRestart = GameObject.Find("SuccessRestartButton");
+				Image successRestartImage = successRestart.GetComponent<Image>();
+				successRestartImage.enabled = true;
+				Button successRestartButton = successRestart.GetComponent<Button>();
+				successRestartButton.interactable = true;
+				GameObject successNext = GameObject.Find("SuccessNextButton");
+				Image successNextImage = successNext.GetComponent<Image>();
+				successNextImage.enabled = true;
+				Button successNextButton = successNext.GetComponent<Button>();
+				successNextButton.interactable = true;
+			}
+		}
+	}
+	public void Failed(){
+		Button[] canvasButtons = GameObject.Find("Canvas").GetComponentsInChildren<Button>();
+		foreach( Button iterator in canvasButtons){
+			iterator.interactable = false;
+		}
+		failedFlag = true;
+	}
+	public void Success(){
+		Button[] canvasButtons = GameObject.Find("Canvas").GetComponentsInChildren<Button>();
+		foreach( Button iterator in canvasButtons){
+			iterator.interactable = false;
+		}
+		successFlag = true;
 	}
 }
