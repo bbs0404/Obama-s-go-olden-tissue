@@ -1,21 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public enum State
 {
     IDLE,
     MOVING,
+    SELECTION,
     SIMULATING
 }
 
 public class GameManager : SingletonBehaviour<GameManager> {
-
+    [SerializeField]
+    private Canvas gameCanvas;
+    [SerializeField]
     private float updateTime = 0.5f;
+    [SerializeField]
+    private int stage = 0;
     private List<GameObject> objectList = null;
     [SerializeField]
     private List<GameObject> objectPrefabs;
+    [SerializeField]
     private PassPeople[,] map;
+    [SerializeField]
+    private People[,] mapdata;
     private bool[,] tissueMap;
     private bool[,] preTissueMap;
     private PassPeople MovingPeople = null;
@@ -23,18 +32,11 @@ public class GameManager : SingletonBehaviour<GameManager> {
     [SerializeField]
     private List<PassPeople> MovingPeopleList;
     private bool isSuccess;
+    [SerializeField]
+    private Sprite[] characters = new Sprite[12];
+    [SerializeField]
+    private State state;
 
-    private State state
-    {
-        get
-        {
-            return state;
-        }
-        set
-        {
-            state = value;
-        }
-    }
     void Start()
     {
         updateTime = 0.5f;
@@ -42,6 +44,15 @@ public class GameManager : SingletonBehaviour<GameManager> {
         MovingPeople = null;
         MoveFinished = false;
         isSuccess = false;
+        if (stage == 0){
+            setSizeOfMap(2);
+            mapdata[0, 1] = People.ARABMALE;
+            mapdata[0, 0] = People.ASIANMALE;
+            mapdata[1, 0] = People.BLACKMALE;
+            mapdata[1, 1] = People.KOREANFEMALE;
+
+            mapUpdate();
+        }
     }
 
     void Update()
@@ -65,6 +76,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
         map = new PassPeople[size, size];
         tissueMap = new bool[size, size];
         preTissueMap = new bool[size, size];
+        mapdata = new People[size, size];
     }
 
     public void mapUpdate()
@@ -73,11 +85,60 @@ public class GameManager : SingletonBehaviour<GameManager> {
             objectList.Clear();
         }
         objectList = new List<GameObject>();
-        for (int i=0; i<map.GetLength(0); i++)
+        for (int i = 0; i < mapdata.GetLength(0); i++)
         {
-            for (int j=0; j<map.GetLength(1); ++j)
+            for (int j = 0; j < mapdata.GetLength(1); ++j)
             {
-                objectList.Add(Instantiate(objectPrefabs[(int)map[i,j].getPeople() - 1]));
+                if (mapdata[i, j] != People.EMPTY) {
+                    GameObject tmp = Instantiate(objectPrefabs[0]);
+                    tmp.transform.SetParent(gameCanvas.transform);
+                    foreach (var item in tmp.GetComponentsInChildren<RectTransform>())
+                    {
+                        item.position = new Vector2(20 + i * (680f / map.GetLength(0)) + (680f / map.GetLength(0)) / 2, 20 + j * (680f / map.GetLength(1)) + (680f / map.GetLength(1)) / 2);
+                        item.sizeDelta = new Vector2(680f / map.GetLength(0), 680f / map.GetLength(1));
+                    }
+                    Image[] images = tmp.GetComponentsInChildren<Image>();
+                    Image image = images[1];
+                    switch (mapdata[i,j])
+                    {
+                        case People.ARABMALE:
+                            tmp.AddComponent<PassPeople1>();
+                            tmp.GetComponent<PassPeople>().setPeople(People.ARABMALE);
+                            break;
+                        case People.ASIANMALE:
+                            tmp.AddComponent<PassPeople5>();
+                            tmp.GetComponent<PassPeople>().setPeople(People.ASIANMALE);
+                            break;
+                        case People.BLACKMALE:
+                            tmp.AddComponent<PassPeople4>();
+                            tmp.GetComponent<PassPeople>().setPeople(People.BLACKMALE);
+                            break;
+                        case People.KOREANFEMALE:
+                            tmp.AddComponent<PassPeople3>();
+                            tmp.GetComponent<PassPeople>().setPeople(People.KOREANFEMALE);
+                            break;
+                        case People.LATINFEMALE:
+                            tmp.AddComponent<PassPeople6>();
+                            tmp.GetComponent<PassPeople>().setPeople(People.LATINFEMALE);
+                            break;
+                        case People.WHITEFEMALE:
+                            tmp.AddComponent<PassPeople2>();
+                            tmp.GetComponent<PassPeople>().setPeople(People.WHITEFEMALE);
+                            break;
+                    }
+                    map[i, j] = tmp.GetComponent<PassPeople>();
+                    switch (mapdata[i, j])
+                    {
+                        case People.NONE:
+                            break;
+                        default:
+                            if (map[i, j].IsTissueReceived)
+                                image.sprite = characters[((int)map[i, j].getPeople() - 2) + 1];
+                            else
+                                image.sprite = characters[((int)map[i, j].getPeople() - 2)];
+                            break;
+                    }
+                }
             }
         }
     }
@@ -126,7 +187,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
         {
             for (int j = 0; j < map.GetLength(1); ++j)
             {
-                if (preTissueMap[i, j])
+                if (tissueMap[i, j])
                 {
                     return false;
                 }

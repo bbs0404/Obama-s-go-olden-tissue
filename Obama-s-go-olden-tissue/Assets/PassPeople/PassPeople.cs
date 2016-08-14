@@ -4,8 +4,12 @@ using System.Collections.Generic;
 public enum People {
     EMPTY,
     NONE,
-    Foo,
-    Boo
+    ASIANMALE,
+    LATINFEMALE,
+    WHITEFEMALE,
+    ARABMALE,
+    KOREANFEMALE,
+    BLACKMALE,
 }
 
 public class PassPeople : MonoBehaviour{
@@ -13,7 +17,7 @@ public class PassPeople : MonoBehaviour{
     public bool IsTissueReceived;
     public bool IsPinned;
     Vector2 IdentityLocation;
-    People people;
+    public People people;
     public List<Vector2> PassLocation = new List<Vector2>(); // 각 하위 클래스 start에서 이거 채워 넣어야 함(vector 2)
     // Use this for initialization
     void Start() {
@@ -54,5 +58,9 @@ public class PassPeople : MonoBehaviour{
     public People getPeople()
     {
         return people;
+    }
+    public void setPeople(People person)
+    {
+        people = person;
     }
 }
