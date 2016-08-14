@@ -8,7 +8,7 @@ public class InputManager : MonoBehaviour {
 	private float accuTime = 0.0f;
 	private bool failedFlag = false;
 	private int failedState = 0;
-	public bool successFlag = false;
+	private bool successFlag = false;
 	private int successState = 0;
 
 	private int levelBase = 1;
@@ -21,9 +21,9 @@ public class InputManager : MonoBehaviour {
 	public Sprite backSprite;
 	public Sprite resetSprite;
 	
-	private mouseMapX = -1;
-	private mouseMapY = -1;
-	private GameObjet[,] coloredMapTiles;
+	private GameObject[,] targetMapTiles;
+	private int mapSize;
+	private PassPeople[,] map;
 
 	// Use this for initialization
 	void Start () {
@@ -81,7 +81,7 @@ public class InputManager : MonoBehaviour {
 
 	}
 	public void GotoList(){
-		Application.LoadLevel("List Scene");
+		//Application.LoadLevel("List Scene");
 	}
 
 	public void LevelLeft(){
@@ -124,7 +124,7 @@ public class InputManager : MonoBehaviour {
 	}
 	public void GoToStage(int idx){
 		if(idx>=1 && idx<=levelLimit){
-			Application.LoadLevel("Main Scene");
+			//Application.LoadLevel("Main Scene");
 		}
 	}
 
@@ -140,21 +140,41 @@ public class InputManager : MonoBehaviour {
 			temp.transform.localScale = new Vector3(tempScale, tempScale, tempScale);
 		}
 
-		PassPeople[,] map = GameManager.Inst().getMap();
-		//Debug.Log(Input.mousePosition);
-		if(mouseMapX != (Input.mousePosition.x - 20.0f) / (680f / map.GetLength(0)) || mouseMapY != (720.0f - Input.mousePosition.y) / (680f / map.GetLength(0))){
-			mouseMapX = (Input.mousePosition.x - 20.0f) / (680f / map.GetLength(0));
-			mouseMapY = (720.0f - Input.mousePosition.y) / (680f / map.GetLength(0));
-		}
-
-		if(mouseMapX>=0 && mouseMapX<map.GetLength(0) &&
-			mouseMapY>=0 && mouseMapY<map.GetLength(0)){
-			foreach(var passLoc in map[mouseMapX][mouseMapY].PassLocation){
-				passLoc.x += mouseMapX;
-				passLoc.y += mouseMapY;
+		if(map != null){
+			int mapX = (int)((Input.mousePosition.x-20.0f) / (680f / map.GetLength(0)));
+			int mapY = (int)((720.0f - Input.mousePosition.x) / (680f / map.GetLength(0)));
+			PassPeople movingPeople = GameManager.Inst().getMovingPeople();
+			for(int i=0; i<mapSize; i++){
+				for(int j=0;j<mapSize;j++){
+					targetMapTiles[i,j].GetComponent<Image>().enabled = false; 
+				}
+			}
+			if(mapX >= 0 && mapX < mapSize && mapY >= 0 && mapY < mapSize
+				&& map[mapX,mapY] != null && movingPeople != null){
+				foreach(var item in movingPeople.PassLocation){
+					if((int)item.x + mapX >= 0 && (int)item.x + mapX < mapSize &&
+						(int)item.y + mapY >= 0 && (int)item.y + mapY < mapSize &&
+						map[(int)item.x + mapX,(int)item.y + mapY] != null)
+						targetMapTiles[(int)item.x + mapX,(int)item.y + mapY].GetComponent<Image>().enabled = true;
+				}
 			}
 		}
-
+		else if(GameManager.Inst().getMap()!=null){
+			map = GameManager.Inst().getMap();
+			mapSize = map.GetLength(0);
+			targetMapTiles = new GameObject[mapSize, mapSize];
+			for(int i=0; i<mapSize; i++){
+				for(int j=0;j<mapSize;j++){
+					targetMapTiles[i,j] = Instantiate(Resources.Load("TargetTile")) as GameObject;
+					targetMapTiles[i,j].transform.SetParent((GameObject.Find("Canvas")).transform, false);
+					targetMapTiles[i,j].transform.position = new Vector2(20 + i * (680f / mapSize) + (680f / mapSize) / 2, 720 - (20 + j * (680f / mapSize) + (680f / mapSize) / 2));
+					targetMapTiles[i,j].transform.localScale = new Vector2(6.80f / mapSize, 6.80f / mapSize);
+					targetMapTiles[i,j].GetComponent<Image>().enabled = false;
+				}
+			}
+		}
+		
+		
 		// When Failed
 		if(failedFlag){
 			accuTime += Time.deltaTime;
