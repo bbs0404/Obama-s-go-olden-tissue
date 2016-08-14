@@ -132,10 +132,12 @@ public class GameManager : SingletonBehaviour<GameManager> {
                         case People.NONE:
                             break;
                         default:
-                            if (map[i, j].IsTissueReceived)
-                                image.sprite = characters[((int)map[i, j].getPeople() - 2) + 1];
-                            else
-                                image.sprite = characters[((int)map[i, j].getPeople() - 2)];
+                        if(map[i, j].IsTissueReceived) {
+                            image.sprite = characters[((int)map[i, j].getPeople() - 2) + 1];
+                            images[0].color = new Color(230f / 255f, 181f / 255f, 78f / 255f);
+                        }
+                        else
+                            image.sprite = characters[((int)map[i, j].getPeople() - 2)];
                             break;
                     }
                 }

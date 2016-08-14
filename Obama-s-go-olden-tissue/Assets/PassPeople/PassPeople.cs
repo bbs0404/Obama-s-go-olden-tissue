@@ -45,15 +45,19 @@ public class PassPeople : MonoBehaviour{
         }
     }
     public void PassTissue() { // 티슈를 받았을 때 넘기는 행동
-        IsTissueReceived = true;
-        bool[,] tempTissueMap = GameManager.Inst().getTissueMap();
-        foreach(Vector2 Loc in PassLocation) {
-            Vector2 focus = new Vector2(IdentityLocation.x + Loc.x, IdentityLocation.y + Loc.y);
-            if(focus.x < tempTissueMap.GetLength(0) && focus.y < tempTissueMap.GetLength(1) && !tempTissueMap[(int)focus.x, (int)focus.y]) {
-                tempTissueMap[(int)focus.x, (int)focus.y] = true;
+        if(!IsTissueReceived) {
+
+
+            IsTissueReceived = true;
+            bool[,] tempTissueMap = GameManager.Inst().getTissueMap();
+            foreach(Vector2 Loc in PassLocation) {
+                Vector2 focus = new Vector2(IdentityLocation.x + Loc.x, IdentityLocation.y + Loc.y);
+                if(focus.x < tempTissueMap.GetLength(0) && focus.y < tempTissueMap.GetLength(1) && !tempTissueMap[(int)focus.x, (int)focus.y]) {
+                    tempTissueMap[(int)focus.x, (int)focus.y] = true;
+                }
             }
+            GameManager.Inst().setTissueMap(tempTissueMap);
         }
-        GameManager.Inst().setTissueMap(tempTissueMap);
     }
     public People getPeople()
     {
