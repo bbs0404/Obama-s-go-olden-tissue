@@ -49,16 +49,27 @@ public class PassPeople : MonoBehaviour{
 
 
             IsTissueReceived = true;
+            
             bool[,] tempTissueMap = GameManager.Inst().getTissueMap();
             PassPeople[,] tempMap = GameManager.Inst().getMap();
-            foreach(Vector2 Loc in PassLocation) {
-                Vector2 focus = new Vector2(IdentityLocation.x + Loc.x, IdentityLocation.y + Loc.y);
-                if(focus.x < tempTissueMap.GetLength(0) && focus.y < tempTissueMap.GetLength(1) && !tempMap[(int)focus.x, (int)focus.y].IsTissueReceived) {
+            for(int i=0; i<PassLocation.Count; ++i)
+            {
+                Vector2 focus = new Vector2(IdentityLocation.x + PassLocation[i].x, IdentityLocation.y + PassLocation[i].y);
+                if (focus.x < tempTissueMap.GetLength(0) && focus.y < tempTissueMap.GetLength(1) && focus.x>=0 && focus.y>=0 && tempMap[(int)focus.x, (int)focus.y] != null && !tempMap[(int)focus.x, (int)focus.y].IsTissueReceived)
+                {
                     tempTissueMap[(int)focus.x, (int)focus.y] = true;
                 }
             }
+            //foreach (var item in PassLocation)
+            //{
+            //    Vector2 focus = new Vector2(IdentityLocation.x + item.x, IdentityLocation.y + item.y);
+            //    if (focus.x < tempTissueMap.GetLength(0) && focus.y < tempTissueMap.GetLength(1) && !tempMap[(int)focus.x, (int)focus.y].IsTissueReceived)
+            //    {
+            //        tempTissueMap[(int)focus.x, (int)focus.y] = true;
+            //    }
+            //}
             tempTissueMap[(int)IdentityLocation.x, (int)IdentityLocation.y] = false;
-            GameManager.Inst().setTissueMap(tempTissueMap);
+
         }
     }
     public People getPeople()

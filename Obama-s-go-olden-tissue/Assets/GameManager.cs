@@ -44,24 +44,24 @@ public class GameManager : SingletonBehaviour<GameManager> {
 
     void Start()
     {
-        updateTime = 0.5f;
+        updateTime = 0f;
         objectList = null;
         MovingPeople = null;
         MoveFinished = false;
         isSuccess = false;
         if (stage == 0){
             setSizeOfMap(5);
-            mapdata[0, 1] = People.ARABMALE;
             mapdata[0, 0] = People.ASIANMALE;
-            mapdata[1, 3] = People.BLACKMALE;
-            mapdata[1, 1] = People.KOREANFEMALE;
-            mapdata[1, 2] = People.NONE;
+            mapdata[0, 1] = People.ASIANMALE;
+            mapdata[0, 2] = People.ASIANMALE;
+            mapdata[0, 3] = People.ASIANMALE;
+            mapdata[0, 4] = People.ASIANMALE;
             selectionNum[0] = 0;
-            selectionNum[1] = 1;
-            selectionNum[2] = 2;
-            selectionNum[3] = 3;
-            selectionNum[4] = 4;
-            selectionNum[5] = 5;
+            selectionNum[1] = 0;
+            selectionNum[2] = 0;
+            selectionNum[3] = 0;
+            selectionNum[4] = 0;
+            selectionNum[5] = 0;
             mapUpdate();
         }
     }
@@ -77,7 +77,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
             else
             {
                 updateTurn();
-                updateTime = 0.5f;
+                updateTime = 1.0f;
             }
         }
     }
@@ -86,6 +86,9 @@ public class GameManager : SingletonBehaviour<GameManager> {
     {
         map = new PassPeople[size, size];
         tissueMap = new bool[size, size];
+        for (int i = 0; i < size; ++i)
+            for (int j = 0; j < size; ++j)
+                tissueMap[i, j] = false;
         preTissueMap = new bool[size, size];
         mapdata = new People[size, size];
     }
@@ -96,68 +99,101 @@ public class GameManager : SingletonBehaviour<GameManager> {
         {
             selectionText[i].text = ": " + selectionNum[i].ToString();
         }
-        if (objectList != null) {
-            foreach (var item in objectList)
-            {
-                Destroy(item);
-            }
-            objectList.Clear();
-        }
-        objectList = new List<GameObject>();
-        for (int i = 0; i < mapdata.GetLength(0); i++)
+        //if (objectList != null) {
+        //    foreach (var item in objectList)
+        //    {
+        //        Destroy(item);
+        //    }
+        //    objectList.Clear();
+        //}
+        //objectList = new List<GameObject>();
+        if (objectList == null)
         {
-            for (int j = 0; j < mapdata.GetLength(1); ++j)
+            objectList = new List<GameObject>();
+            for (int i = 0; i < mapdata.GetLength(0); i++)
             {
-                if (mapdata[i, j] != People.EMPTY) {
-                    GameObject tmp = Instantiate(objectPrefabs[0]);
-                    objectList.Add(tmp);
-                    tmp.transform.SetParent(gameCanvas.transform);
-                    foreach (var item in tmp.GetComponentsInChildren<RectTransform>())
+                for (int j = 0; j < mapdata.GetLength(1); ++j)
+                {
+                    if (mapdata[i, j] != People.EMPTY)
                     {
-                        item.position = new Vector2(20 + i * (680f / map.GetLength(0)) + (680f / map.GetLength(0)) / 2, 720 - ( 20 + j * (680f / map.GetLength(1)) + (680f / map.GetLength(1)) / 2 ));
-                        item.sizeDelta = new Vector2(680f / map.GetLength(0), 680f / map.GetLength(1));
+                        GameObject tmp = Instantiate(objectPrefabs[0]);
+                        if (!objectList.Contains(tmp))
+                            objectList.Add(tmp);
+                        tmp.transform.SetParent(gameCanvas.transform);
+                        foreach (var item in tmp.GetComponentsInChildren<RectTransform>())
+                        {
+                            item.position = new Vector2(20 + i * (680f / map.GetLength(0)) + (680f / map.GetLength(0)) / 2, 720 - (20 + j * (680f / map.GetLength(1)) + (680f / map.GetLength(1)) / 2));
+                            item.sizeDelta = new Vector2(680f / map.GetLength(0), 680f / map.GetLength(1));
+                        }
+                        Image[] images = tmp.GetComponentsInChildren<Image>();
+                        Image image = images[1];
+                        switch (mapdata[i, j])
+                        {
+                            case People.NONE:
+                                tmp.AddComponent<PassPeople>();
+                                tmp.GetComponent<PassPeople>().setPeople(People.NONE);
+                                break;
+                            case People.ARABMALE:
+                                tmp.AddComponent<PassPeople1>();
+                                tmp.GetComponent<PassPeople>().setPeople(People.ARABMALE);
+                                break;
+                            case People.ASIANMALE:
+                                tmp.AddComponent<PassPeople5>();
+                                tmp.GetComponent<PassPeople>().setPeople(People.ASIANMALE);
+                                break;
+                            case People.BLACKMALE:
+                                tmp.AddComponent<PassPeople4>();
+                                tmp.GetComponent<PassPeople>().setPeople(People.BLACKMALE);
+                                break;
+                            case People.KOREANFEMALE:
+                                tmp.AddComponent<PassPeople3>();
+                                tmp.GetComponent<PassPeople>().setPeople(People.KOREANFEMALE);
+                                break;
+                            case People.LATINFEMALE:
+                                tmp.AddComponent<PassPeople6>();
+                                tmp.GetComponent<PassPeople>().setPeople(People.LATINFEMALE);
+                                break;
+                            case People.WHITEFEMALE:
+                                tmp.AddComponent<PassPeople2>();
+                                tmp.GetComponent<PassPeople>().setPeople(People.WHITEFEMALE);
+                                break;
+                        }
+                        tmp.GetComponent<PassPeople>().IdentityLocation = new Vector2(i, j);
+                        map[i, j] = tmp.GetComponent<PassPeople>();
+                        switch (mapdata[i, j])
+                        {
+                            case People.NONE:
+                                break;
+                            default:
+                                if (map[i, j].IsTissueReceived)
+                                {
+                                    image.sprite = characters[((int)map[i, j].getPeople() - 2) * 2 + 1];
+                                    images[0].color = new Color(230f / 255f, 181f / 255f, 78f / 255f);
+                                }
+                                else
+                                    image.sprite = characters[((int)map[i, j].getPeople() - 2) * 2];
+                                break;
+                        }
                     }
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < map.GetLength(0); i++)
+            {
+                for (int j = 0; j < map.GetLength(1) && map[i,j]!=null; ++j)
+                {
+                    GameObject tmp = map[i, j].gameObject;
                     Image[] images = tmp.GetComponentsInChildren<Image>();
                     Image image = images[1];
-                    switch (mapdata[i,j])
-                    {
-                        case People.NONE:
-                            tmp.AddComponent<PassPeople>();
-                            tmp.GetComponent<PassPeople>().setPeople(People.NONE);
-                            break;
-                        case People.ARABMALE:
-                            tmp.AddComponent<PassPeople1>();
-                            tmp.GetComponent<PassPeople>().setPeople(People.ARABMALE);
-                            break;
-                        case People.ASIANMALE:
-                            tmp.AddComponent<PassPeople5>();
-                            tmp.GetComponent<PassPeople>().setPeople(People.ASIANMALE);
-                            break;
-                        case People.BLACKMALE:
-                            tmp.AddComponent<PassPeople4>();
-                            tmp.GetComponent<PassPeople>().setPeople(People.BLACKMALE);
-                            break;
-                        case People.KOREANFEMALE:
-                            tmp.AddComponent<PassPeople3>();
-                            tmp.GetComponent<PassPeople>().setPeople(People.KOREANFEMALE);
-                            break;
-                        case People.LATINFEMALE:
-                            tmp.AddComponent<PassPeople6>();
-                            tmp.GetComponent<PassPeople>().setPeople(People.LATINFEMALE);
-                            break;
-                        case People.WHITEFEMALE:
-                            tmp.AddComponent<PassPeople2>();
-                            tmp.GetComponent<PassPeople>().setPeople(People.WHITEFEMALE);
-                            break;
-                    }
-                    tmp.GetComponent<PassPeople>().IdentityLocation = new Vector2(i, j);
-                    map[i, j] = tmp.GetComponent<PassPeople>();
                     switch (mapdata[i, j])
                     {
                         case People.NONE:
                             break;
                         default:
-                            if(map[i, j].IsTissueReceived) {
+                            if (map[i, j].IsTissueReceived)
+                            {
                                 image.sprite = characters[((int)map[i, j].getPeople() - 2) * 2 + 1];
                                 images[0].color = new Color(230f / 255f, 181f / 255f, 78f / 255f);
                             }
@@ -189,7 +225,12 @@ public class GameManager : SingletonBehaviour<GameManager> {
                 }
             }
         }
-        if (IsEnded())
+        mapUpdate();
+        if (!IsEnded())
+        {
+            
+        }
+        else
         {
             checkResult();
             if (isSuccess)
@@ -201,10 +242,6 @@ public class GameManager : SingletonBehaviour<GameManager> {
                 Debug.Log("You failed!");
             }
             state = State.IDLE;
-        }
-        else
-        {
-            mapUpdate();
         }
     }
     
@@ -227,7 +264,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
     {
         for (int i = 0; i < map.GetLength(0); i++)
         {
-            for (int j = 0; j < map.GetLength(1); ++j)
+            for (int j = 0; j < map.GetLength(1) && map[i,j] != null; ++j)
             {
                 if (!map[i,j].IsTissueReceived)
                 {
@@ -292,5 +329,9 @@ public class GameManager : SingletonBehaviour<GameManager> {
     public int[] getSelectionNum()
     {
         return selectionNum;
+    }
+    public void setStage(int stageNum)
+    {
+        stage = stageNum;
     }
 }

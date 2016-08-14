@@ -111,5 +111,20 @@ public class InputManager : MonoBehaviour {
             GameManager.Inst().mapUpdate();
             GameManager.Inst().setState(State.IDLE);
         }
+        if (GameManager.Inst().getState() == State.SELECTION)
+        {
+            Image[] objects = button.GetComponentsInChildren<Image>();
+            GameManager.Inst().getTissueMap()[(int)objects[1].gameObject.transform.parent.GetComponent<PassPeople>().IdentityLocation.x, (int)objects[1].gameObject.transform.parent.GetComponent<PassPeople>().IdentityLocation.y] = true;
+            GameManager.Inst().setState(State.SIMULATING);
+        }
+    }
+    public void OnPlacingButtonClicked()
+    {
+        for (int i=0; i<6; ++i)
+        {
+            if (GameManager.Inst().getSelectionNum()[i] > 0)
+                return;
+        }
+        GameManager.Inst().setState(State.SELECTION);
     }
 }
