@@ -50,12 +50,14 @@ public class PassPeople : MonoBehaviour{
 
             IsTissueReceived = true;
             bool[,] tempTissueMap = GameManager.Inst().getTissueMap();
+            PassPeople[,] tempMap = GameManager.Inst().getMap();
             foreach(Vector2 Loc in PassLocation) {
                 Vector2 focus = new Vector2(IdentityLocation.x + Loc.x, IdentityLocation.y + Loc.y);
-                if(focus.x < tempTissueMap.GetLength(0) && focus.y < tempTissueMap.GetLength(1) && !tempTissueMap[(int)focus.x, (int)focus.y]) {
+                if(focus.x < tempTissueMap.GetLength(0) && focus.y < tempTissueMap.GetLength(1) && !tempMap[(int)focus.x, (int)focus.y].IsTissueReceived) {
                     tempTissueMap[(int)focus.x, (int)focus.y] = true;
                 }
             }
+            tempTissueMap[(int)IdentityLocation.x, (int)IdentityLocation.y] = false;
             GameManager.Inst().setTissueMap(tempTissueMap);
         }
     }
