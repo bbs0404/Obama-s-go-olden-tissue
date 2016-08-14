@@ -51,12 +51,12 @@ public class GameManager : SingletonBehaviour<GameManager> {
         isSuccess = false;
         if (stage == 0){
             setSizeOfMap(5);
-            mapdata[0, 0] = People.ASIANMALE;
+            mapdata[0, 0] = People.NONE;
             mapdata[0, 1] = People.ASIANMALE;
             mapdata[0, 2] = People.ASIANMALE;
             mapdata[0, 3] = People.ASIANMALE;
             mapdata[0, 4] = People.ASIANMALE;
-            selectionNum[0] = 0;
+            selectionNum[0] = 1;
             selectionNum[1] = 0;
             selectionNum[2] = 0;
             selectionNum[3] = 0;
@@ -99,14 +99,6 @@ public class GameManager : SingletonBehaviour<GameManager> {
         {
             selectionText[i].text = ": " + selectionNum[i].ToString();
         }
-        //if (objectList != null) {
-        //    foreach (var item in objectList)
-        //    {
-        //        Destroy(item);
-        //    }
-        //    objectList.Clear();
-        //}
-        //objectList = new List<GameObject>();
         if (objectList == null)
         {
             objectList = new List<GameObject>();
@@ -235,6 +227,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
             checkResult();
             if (isSuccess)
             {
+                InputManager.Inst().Success();
                 Debug.Log("You success!");
             }
             else
