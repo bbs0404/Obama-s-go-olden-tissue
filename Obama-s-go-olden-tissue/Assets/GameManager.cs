@@ -42,10 +42,10 @@ public class GameManager : SingletonBehaviour<GameManager> {
     [SerializeField]
     private Text[] selectionText = new Text[6];
 
+
     void Start()
     {
-        updateTime = 0.5f;
-        stage = 1;
+        updateTime = 0f;
         objectList = null;
         MovingPeople = null;
         MoveFinished = false;
@@ -334,7 +334,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
             else
             {
                 updateTurn();
-                updateTime = 1.0f;
+                updateTime = 0.7f;
             }
         }
     }
@@ -516,7 +516,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
     {
         for (int i = 0; i < map.GetLength(0); i++)
         {
-            for (int j = 0; j < map.GetLength(1) && map[i,j] != null; ++j)
+            for (int j = 0; j < map.GetLength(1) && map[i,j] != null && map[i,j].getPeople() != People.NONE; ++j)
             {
                 if (!map[i,j].IsTissueReceived)
                 {

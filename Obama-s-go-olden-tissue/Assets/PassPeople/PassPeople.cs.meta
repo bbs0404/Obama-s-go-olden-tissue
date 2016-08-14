@@ -1,10 +1,11 @@
 fileFormatVersion: 2
 guid: 52f9e8988eadeca48a32d9b3f089d12c
-timeCreated: 1471106685
+timeCreated: 1471212482
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - tissue: {fileID: 1000012535833462, guid: c3979aab9d3436343a8b5f7f9b9211e4, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

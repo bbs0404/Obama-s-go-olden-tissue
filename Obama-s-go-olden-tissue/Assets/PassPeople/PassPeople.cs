@@ -14,6 +14,7 @@ public enum People {
 
 public class PassPeople : MonoBehaviour{
 
+    public GameObject tissue;
     public bool IsTissueReceived;
     public bool IsPinned;
     public Vector2 IdentityLocation;
@@ -21,6 +22,7 @@ public class PassPeople : MonoBehaviour{
     public List<Vector2> PassLocation = new List<Vector2>(); // 각 하위 클래스 start에서 이거 채워 넣어야 함(vector 2)
     // Use this for initialization
     void Start() {
+        
         IsTissueReceived = false;
     }
     //void OnMouseDown() {
@@ -47,7 +49,7 @@ public class PassPeople : MonoBehaviour{
     public void PassTissue() { // 티슈를 받았을 때 넘기는 행동
         if(!IsTissueReceived) {
 
-
+            tissue = GameObject.Find("TissueEffect");
             IsTissueReceived = true;
             
             bool[,] tempTissueMap = GameManager.Inst().getTissueMap();
@@ -58,6 +60,11 @@ public class PassPeople : MonoBehaviour{
                 if (focus.x < tempTissueMap.GetLength(0) && focus.y < tempTissueMap.GetLength(1) && focus.x>=0 && focus.y>=0 && tempMap[(int)focus.x, (int)focus.y] != null && !tempMap[(int)focus.x, (int)focus.y].IsTissueReceived)
                 {
                     tempTissueMap[(int)focus.x, (int)focus.y] = true;
+                     GameObject tissues = Instantiate(tissue,this.GetComponent<RectTransform>().position, this.GetComponent<RectTransform>().rotation) as GameObject;
+                    tissues.transform.parent = this.transform.parent;
+                    tissues.GetComponent<TIssueEffect>().StartTile = tempMap[(int)IdentityLocation.x, (int)IdentityLocation.y].gameObject.GetComponent<RectTransform>();
+                    tissues.GetComponent<TIssueEffect>().EndTile = tempMap[(int)focus.x, (int)focus.y].gameObject.GetComponent<RectTransform>();
+                    tissues.GetComponent<TIssueEffect>().enabled = true;
                 }
             }
             //foreach (var item in PassLocation)

@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEditor;
 
 public class InputManager : SingletonBehaviour<InputManager> {
 
@@ -26,6 +24,9 @@ public class InputManager : SingletonBehaviour<InputManager> {
 	private GameObject[,] targetMapTiles;
 	private int mapSize;
 	private PassPeople[,] map;
+
+    [SerializeField]
+    private AudioSource knock;
 
 	// Use this for initialization
 	void Start () {
@@ -326,4 +327,17 @@ public class InputManager : SingletonBehaviour<InputManager> {
         }
         GameManager.Inst().setState(State.SELECTION);
     }
+    public void LevelSelect(int level)
+    {
+        if (levelDoors[level-1].GetComponent<Image>().sprite == lockedSprite)
+        {
+            SoundManager.Inst().playAudio(knock);
+        }
+        else
+        {
+            GameManager.Inst().setStage(level);
+            SceneManager.LoadScene("MainScene");
+        }
+    }
+
 }
