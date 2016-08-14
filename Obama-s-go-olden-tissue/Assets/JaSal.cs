@@ -18,6 +18,7 @@ public class JaSal : MonoBehaviour {
                         bool tmpbool = objects[0].GetComponent<PassPeople>().IsTissueReceived;
                         Destroy(objects[0].gameObject.GetComponent<PassPeople>());
                         PassPeople1 p = objects[0].gameObject.AddComponent<PassPeople1>();
+                        p.IdentityLocation = tmpvecor;
                         GameManager.Inst().getMapData()[(int)tmpvecor.x, (int)tmpvecor.y] = People.ARABMALE;
                         GameManager.Inst().getMap()[(int)tmpvecor.x, (int)tmpvecor.y] = p;
                         p.setPeople(People.ARABMALE);
@@ -29,6 +30,7 @@ public class JaSal : MonoBehaviour {
                         bool tmpbool = objects[0].GetComponent<PassPeople>().IsTissueReceived;
                         Destroy(objects[0].gameObject.GetComponent<PassPeople>());
                         PassPeople5 p = objects[0].gameObject.AddComponent<PassPeople5>();
+                        p.IdentityLocation = tmpvecor;
                         GameManager.Inst().getMapData()[(int)tmpvecor.x, (int)tmpvecor.y] = People.ASIANMALE;
                         GameManager.Inst().getMap()[(int)tmpvecor.x, (int)tmpvecor.y] = p;
                         p.setPeople(People.ASIANMALE);
@@ -40,6 +42,7 @@ public class JaSal : MonoBehaviour {
                         bool tmpbool = objects[0].GetComponent<PassPeople>().IsTissueReceived;
                         Destroy(objects[0].gameObject.GetComponent<PassPeople>());
                         PassPeople4 p = objects[0].gameObject.AddComponent<PassPeople4>();
+                        p.IdentityLocation = tmpvecor;
                         GameManager.Inst().getMapData()[(int)tmpvecor.x, (int)tmpvecor.y] = People.BLACKMALE;
                         GameManager.Inst().getMap()[(int)tmpvecor.x, (int)tmpvecor.y] = p;
                         p.setPeople(People.BLACKMALE);
@@ -51,6 +54,7 @@ public class JaSal : MonoBehaviour {
                         bool tmpbool = objects[0].GetComponent<PassPeople>().IsTissueReceived;
                         Destroy(objects[0].gameObject.GetComponent<PassPeople>());
                         PassPeople3 p = objects[0].gameObject.AddComponent<PassPeople3>();
+                        p.IdentityLocation = tmpvecor;
                         GameManager.Inst().getMapData()[(int)tmpvecor.x, (int)tmpvecor.y] = People.KOREANFEMALE;
                         GameManager.Inst().getMap()[(int)tmpvecor.x, (int)tmpvecor.y] = p;
                         p.setPeople(People.KOREANFEMALE);
@@ -62,6 +66,7 @@ public class JaSal : MonoBehaviour {
                         bool tmpbool = objects[0].GetComponent<PassPeople>().IsTissueReceived;
                         Destroy(objects[0].gameObject.GetComponent<PassPeople>());
                         PassPeople6 p = objects[0].gameObject.AddComponent<PassPeople6>();
+                        p.IdentityLocation = tmpvecor;
                         GameManager.Inst().getMapData()[(int)tmpvecor.x, (int)tmpvecor.y] = People.LATINFEMALE;
                         GameManager.Inst().getMap()[(int)tmpvecor.x, (int)tmpvecor.y] = p;
                         p.setPeople(People.LATINFEMALE);
@@ -73,6 +78,7 @@ public class JaSal : MonoBehaviour {
                         bool tmpbool = objects[0].GetComponent<PassPeople>().IsTissueReceived;
                         Destroy(objects[0].gameObject.GetComponent<PassPeople>());
                         PassPeople2 p = objects[0].gameObject.AddComponent<PassPeople2>();
+                        p.IdentityLocation = tmpvecor;
                         GameManager.Inst().getMapData()[(int)tmpvecor.x, (int)tmpvecor.y] = People.WHITEFEMALE;
                         GameManager.Inst().getMap()[(int)tmpvecor.x, (int)tmpvecor.y] = p;
                         p.setPeople(People.WHITEFEMALE);
