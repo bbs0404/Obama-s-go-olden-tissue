@@ -11,9 +11,19 @@ public class InputManager : MonoBehaviour {
 	private int failedState = 0;
 	public bool successFlag = false;
 	private int successState = 0;
+
+	private int levelBase = 1;
+	private int levelLimit = 10;
+	private GameObject[] levelDoors = new GameObject[6];
+	
+	public Sprite lockedSprite;
+	public Sprite unlockedSprite;
+
 	// Use this for initialization
 	void Start () {
-	
+		for(int i=0;i<6;i++){
+			levelDoors[i] = GameObject.Find("DoorButton" + (i+1).ToString());
+		}
 	}
 	
 	// Pop-up appears.
@@ -61,6 +71,41 @@ public class InputManager : MonoBehaviour {
 	public void GotoList(){
 		Application.LoadLevel("List Scene");
 	}
+
+	public void LevelLeft(){
+		if(levelBase == 1)
+			levelBase = (levelLimit + 5)/6*6 - 5; 
+		else
+			levelBase -= 6;
+		LevelButtonRenew();
+	}
+	public void LevelRight(){
+		if(levelBase+6 > levelLimit)
+			levelBase = 1; 
+		else
+			levelBase += 6;
+		LevelButtonRenew();
+	}
+	public void LevelButtonRenew(){
+		for(int i=0;i<6;i++){
+			if(i+levelBase > levelLimit){
+				levelDoors[i].transform.Find("Text").GetComponent<Text>().text = "";
+				levelDoors[i].GetComponent<Image>().sprite = lockedSprite;
+			}
+			else{
+				levelDoors[i].transform.Find("Text").GetComponent<Text>().text = (i+levelBase).ToString();
+				levelDoors[i].GetComponent<Image>().sprite = unlockedSprite;
+			}
+			levelDoors[i].GetComponent<Button>().onClick.AddListener(() => GoToStage(i+levelBase));
+		}
+	}
+	public void GoToStage(int idx){
+		if(idx>=1 && idx<=levelLimit){
+			Application.LoadLevel("Main Scene");
+		}
+	}
+
+
 	public void Update(){
 		GameObject temp = GameObject.Find("TitlePaper");
 		if(temp != null){
@@ -71,7 +116,7 @@ public class InputManager : MonoBehaviour {
 			float tempScale = 1.2f - accuTime / 0.6f * 0.2f;
 			temp.transform.localScale = new Vector3(tempScale, tempScale, tempScale);
 		}
-
+		// When Failed
 		if(failedFlag){
 			accuTime += Time.deltaTime;
 			if(accuTime < 0.5){
@@ -115,6 +160,7 @@ public class InputManager : MonoBehaviour {
 				failedState = 4;
 			}
 		}
+		// When Success
 		if(successFlag){
 			GameObject tissue = GameObject.Find("tissue");
 			tissue.transform.RotateAround(tissue.transform.position, Vector3.up, 50.0f * Time.deltaTime);
