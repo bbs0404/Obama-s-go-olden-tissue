@@ -156,7 +156,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
                             }
                             else
                                 image.sprite = characters[((int)map[i, j].getPeople() - 2)];
-                            break;
+                        break;
                     }
                 }
             }
