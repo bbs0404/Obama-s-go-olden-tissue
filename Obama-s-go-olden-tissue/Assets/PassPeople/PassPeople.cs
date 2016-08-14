@@ -16,34 +16,34 @@ public class PassPeople : MonoBehaviour{
 
     public bool IsTissueReceived;
     public bool IsPinned;
-    Vector2 IdentityLocation;
+    public Vector2 IdentityLocation;
     public People people;
     public List<Vector2> PassLocation = new List<Vector2>(); // 각 하위 클래스 start에서 이거 채워 넣어야 함(vector 2)
     // Use this for initialization
     void Start() {
         IsTissueReceived = false;
     }
-    void OnMouseDown() {
-        if(GameManager.Inst().getState() == State.IDLE) {
-            if(!IsPinned) {
-                GameManager.Inst().setMovingPeople(this);
-                GameManager.Inst().setState(State.MOVING);
-            }
-        }
-        if(GameManager.Inst().getState() == State.MOVING) {
-            if(this.people == People.NONE && GameManager.Inst().getMovingPeopleList().Contains(this)) {
-                this.people = GameManager.Inst().getMovingPeople().people;
-                GameManager.Inst().setState(State.IDLE);
-                GameManager.Inst().getMovingPeopleList().Remove(this);
-                if(GameManager.Inst().getMovingPeopleList().Count <= 0)
-                {
-                    GameManager.Inst().setMoveFinished(true);
-                }
-                Destroy(this);
-            }
-            GameManager.Inst().mapUpdate();
-        }
-    }
+    //void OnMouseDown() {
+    //    if(GameManager.Inst().getState() == State.IDLE) {
+    //        if(!IsPinned) {
+    //            GameManager.Inst().setMovingPeople(this);
+    //            GameManager.Inst().setState(State.MOVING);
+    //        }
+    //    }
+    //    if(GameManager.Inst().getState() == State.MOVING) {
+    //        if(this.people == People.NONE && GameManager.Inst().getMovingPeopleList().Contains(this)) {
+    //            this.people = GameManager.Inst().getMovingPeople().people;
+    //            GameManager.Inst().setState(State.IDLE);
+    //            GameManager.Inst().getMovingPeopleList().Remove(this);
+    //            if(GameManager.Inst().getMovingPeopleList().Count <= 0)
+    //            {
+    //                GameManager.Inst().setMoveFinished(true);
+    //            }
+    //            Destroy(this);
+    //        }
+    //        GameManager.Inst().mapUpdate();
+    //    }
+    //}
     public void PassTissue() { // 티슈를 받았을 때 넘기는 행동
         if(!IsTissueReceived) {
 

@@ -18,6 +18,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
     private float updateTime = 0.5f;
     [SerializeField]
     private int stage = 0;
+    [SerializeField]
     private List<GameObject> objectList = null;
     [SerializeField]
     private List<GameObject> objectPrefabs;
@@ -61,10 +62,6 @@ public class GameManager : SingletonBehaviour<GameManager> {
             selectionNum[3] = 3;
             selectionNum[4] = 4;
             selectionNum[5] = 5;
-            for (int i=0; i<6; ++i)
-            {
-                selectionText[i].text = ": " + selectionNum[i].ToString();
-            }
             mapUpdate();
         }
     }
@@ -95,7 +92,15 @@ public class GameManager : SingletonBehaviour<GameManager> {
 
     public void mapUpdate()
     {
+        for (int i = 0; i < 6; ++i)
+        {
+            selectionText[i].text = ": " + selectionNum[i].ToString();
+        }
         if (objectList != null) {
+            foreach (var item in objectList)
+            {
+                Destroy(item);
+            }
             objectList.Clear();
         }
         objectList = new List<GameObject>();
@@ -105,6 +110,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
             {
                 if (mapdata[i, j] != People.EMPTY) {
                     GameObject tmp = Instantiate(objectPrefabs[0]);
+                    objectList.Add(tmp);
                     tmp.transform.SetParent(gameCanvas.transform);
                     foreach (var item in tmp.GetComponentsInChildren<RectTransform>())
                     {
@@ -115,6 +121,10 @@ public class GameManager : SingletonBehaviour<GameManager> {
                     Image image = images[1];
                     switch (mapdata[i,j])
                     {
+                        case People.NONE:
+                            tmp.AddComponent<PassPeople>();
+                            tmp.GetComponent<PassPeople>().setPeople(People.NONE);
+                            break;
                         case People.ARABMALE:
                             tmp.AddComponent<PassPeople1>();
                             tmp.GetComponent<PassPeople>().setPeople(People.ARABMALE);
@@ -140,22 +150,19 @@ public class GameManager : SingletonBehaviour<GameManager> {
                             tmp.GetComponent<PassPeople>().setPeople(People.WHITEFEMALE);
                             break;
                     }
+                    tmp.GetComponent<PassPeople>().IdentityLocation = new Vector2(i, j);
                     map[i, j] = tmp.GetComponent<PassPeople>();
                     switch (mapdata[i, j])
                     {
                         case People.NONE:
                             break;
                         default:
-                            if (map[i, j].IsTissueReceived)
-                                image.sprite = characters[((int)map[i, j].getPeople() - 2) * 2 + 1];
-                            else
-                                image.sprite = characters[((int)map[i, j].getPeople() - 2) * 2];
                             if(map[i, j].IsTissueReceived) {
-                                image.sprite = characters[((int)map[i, j].getPeople() - 2) + 1];
+                                image.sprite = characters[((int)map[i, j].getPeople() - 2) * 2 + 1];
                                 images[0].color = new Color(230f / 255f, 181f / 255f, 78f / 255f);
                             }
                             else
-                                image.sprite = characters[((int)map[i, j].getPeople() - 2)];
+                                image.sprite = characters[((int)map[i, j].getPeople() - 2) * 2];
                             break;
                     }
                 }
@@ -273,5 +280,17 @@ public class GameManager : SingletonBehaviour<GameManager> {
     public List<PassPeople> getMovingPeopleList()
     {
         return MovingPeopleList;
+    }
+    public People[,] getMapData()
+    {
+        return mapdata;
+    }
+    public void setMapData(People[,] newmapdata)
+    {
+        mapdata = newmapdata;
+    }
+    public int[] getSelectionNum()
+    {
+        return selectionNum;
     }
 }
