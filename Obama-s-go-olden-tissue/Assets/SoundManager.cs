@@ -15,7 +15,6 @@ public class SoundManager : SingletonBehaviour<SoundManager> {
 
     void Awake()
     {
-        Inst();
         SFX_List = (AudioSource[])GameObject.FindObjectsOfType(typeof(AudioSource));
         foreach (var item in SFX_List)
         {
@@ -58,4 +57,4 @@ public class SoundManager : SingletonBehaviour<SoundManager> {
     {
         BGM_Volume = volume;
     }
-}
+} 

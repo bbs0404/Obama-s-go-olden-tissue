@@ -69,7 +69,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
         {
             for (int j=0; j<map.GetLength(1); ++j)
             {
-                Instantiate(objectPrefabs[(int)map[i,j] - 1]);
+                objectList.Add(Instantiate(objectPrefabs[(int)map[i,j] - 1]));
             }
         }
     }
@@ -93,8 +93,37 @@ public class GameManager : SingletonBehaviour<GameManager> {
                 }
             }
         }
-        mapUpdate();
+        if (IsEnded())
+        {
+            checkResult();
+            state = State.IDLE;
+        }
+        else
+        {
+            mapUpdate();
+        }
     }
+    
+    public bool IsEnded()
+    {
+        for (int i = 0; i < map.GetLength(0); i++)
+        {
+            for (int j = 0; j < map.GetLength(1); ++j)
+            {
+                if (preTissueMap[i, j])
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public void checkResult()
+    {
+
+    }
+
     public People[,] getMap()
     {
         return map;
