@@ -1,15 +1,38 @@
 ﻿using UnityEngine;
 using System.Collections;
+
+public enum People {
+    EMPTY,
+    NONE,
+    Foo,
+    Boo
+}
+
 public class PassPeople : MonoBehaviour{
 
     bool IsTissueReceived;
+    public bool IsPinned;
     Vector2 IdentityLocation;
+    People people;
     ArrayList PassLocation = new ArrayList(); // 각 하위 클래스 start에서 이거 채워 넣어야 함(vector 2)
     // Use this for initialization
     void Start() {
         IsTissueReceived = false;
     }
-
+    void OnMouseDown() {
+        if(GameManager.Inst().getState() == State.IDLE) {
+            if(!IsPinned) {
+                GameManager.Inst().setMovingPeople(this);
+                GameManager.Inst().setState(State.MOVING);
+            }
+        }
+        if(GameManager.Inst().getState() == State.MOVING) {
+            if(this.people == People.NONE) {
+                this.people = GameManager.Inst().getMovingPeople().people;
+                GameManager.Inst().setState(State.IDLE);
+            }
+        }
+    }
     public void PassTissue() { // 티슈를 받았을 때 넘기는 행동
         IsTissueReceived = true;
         bool[,] tempTissueMap = GameManager.Inst().getTissueMap();

@@ -2,16 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public enum People
-{
-    NONE,
-    Foo,
-    Boo
-}
-
 public enum State
 {
     IDLE,
+    MOVING,
     SIMULATING
 }
 
@@ -24,6 +18,8 @@ public class GameManager : SingletonBehaviour<GameManager> {
     private People[,] map;
     private bool[,] tissueMap;
     private bool[,] preTissueMap;
+    private PassPeople MovingPeople = null;
+
     private State state
     {
         get
@@ -147,5 +143,11 @@ public class GameManager : SingletonBehaviour<GameManager> {
     public void setState(State newState)
     {
         state = newState;
+    }
+    public PassPeople getMovingPeople() {
+        return MovingPeople;
+    }
+    public void setMovingPeople(PassPeople newPeople) {
+        MovingPeople = newPeople;
     }
 }
