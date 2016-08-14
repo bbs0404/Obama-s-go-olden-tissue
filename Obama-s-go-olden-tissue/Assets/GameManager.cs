@@ -36,6 +36,10 @@ public class GameManager : SingletonBehaviour<GameManager> {
     private Sprite[] characters = new Sprite[12];
     [SerializeField]
     private State state;
+    [SerializeField]
+    private int[] selectionNum = new int[6];
+    [SerializeField]
+    private Text[] selectionText = new Text[6];
 
     void Start()
     {
@@ -45,12 +49,22 @@ public class GameManager : SingletonBehaviour<GameManager> {
         MoveFinished = false;
         isSuccess = false;
         if (stage == 0){
-            setSizeOfMap(2);
+            setSizeOfMap(5);
             mapdata[0, 1] = People.ARABMALE;
             mapdata[0, 0] = People.ASIANMALE;
-            mapdata[1, 0] = People.BLACKMALE;
+            mapdata[1, 3] = People.BLACKMALE;
             mapdata[1, 1] = People.KOREANFEMALE;
-
+            mapdata[1, 2] = People.NONE;
+            selectionNum[0] = 0;
+            selectionNum[1] = 1;
+            selectionNum[2] = 2;
+            selectionNum[3] = 3;
+            selectionNum[4] = 4;
+            selectionNum[5] = 5;
+            for (int i=0; i<6; ++i)
+            {
+                selectionText[i].text = ": " + selectionNum[i].ToString();
+            }
             mapUpdate();
         }
     }
@@ -94,7 +108,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
                     tmp.transform.SetParent(gameCanvas.transform);
                     foreach (var item in tmp.GetComponentsInChildren<RectTransform>())
                     {
-                        item.position = new Vector2(20 + i * (680f / map.GetLength(0)) + (680f / map.GetLength(0)) / 2, 20 + j * (680f / map.GetLength(1)) + (680f / map.GetLength(1)) / 2);
+                        item.position = new Vector2(20 + i * (680f / map.GetLength(0)) + (680f / map.GetLength(0)) / 2, 720 - ( 20 + j * (680f / map.GetLength(1)) + (680f / map.GetLength(1)) / 2 ));
                         item.sizeDelta = new Vector2(680f / map.GetLength(0), 680f / map.GetLength(1));
                     }
                     Image[] images = tmp.GetComponentsInChildren<Image>();
@@ -133,9 +147,9 @@ public class GameManager : SingletonBehaviour<GameManager> {
                             break;
                         default:
                             if (map[i, j].IsTissueReceived)
-                                image.sprite = characters[((int)map[i, j].getPeople() - 2) + 1];
+                                image.sprite = characters[((int)map[i, j].getPeople() - 2) * 2 + 1];
                             else
-                                image.sprite = characters[((int)map[i, j].getPeople() - 2)];
+                                image.sprite = characters[((int)map[i, j].getPeople() - 2) * 2];
                             break;
                     }
                 }
