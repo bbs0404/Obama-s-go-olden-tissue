@@ -15,13 +15,14 @@ public class GameManager : SingletonBehaviour<GameManager> {
     private List<GameObject> objectList = null;
     [SerializeField]
     private List<GameObject> objectPrefabs;
-    private People[,] map;
+    private PassPeople[,] map;
     private bool[,] tissueMap;
     private bool[,] preTissueMap;
     private PassPeople MovingPeople = null;
     private bool MoveFinished = false;
     [SerializeField]
     private List<PassPeople> MovingPeopleList;
+    private bool isSuccess;
 
     private State state
     {
@@ -40,6 +41,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
         objectList = null;
         MovingPeople = null;
         MoveFinished = false;
+        isSuccess = false;
     }
 
     void Update()
@@ -60,7 +62,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
 
     public void setSizeOfMap(int size)
     {
-        map = new People[size, size];
+        map = new PassPeople[size, size];
         tissueMap = new bool[size, size];
         preTissueMap = new bool[size, size];
     }
@@ -75,7 +77,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
         {
             for (int j=0; j<map.GetLength(1); ++j)
             {
-                objectList.Add(Instantiate(objectPrefabs[(int)map[i,j] - 1]));
+                objectList.Add(Instantiate(objectPrefabs[(int)map[i,j].getPeople() - 1]));
             }
         }
     }
@@ -95,13 +97,21 @@ public class GameManager : SingletonBehaviour<GameManager> {
             {
                 if (preTissueMap[i, j])
                 {
-                    //passtissue 호출
+                    map[i, j].PassTissue();
                 }
             }
         }
         if (IsEnded())
         {
             checkResult();
+            if (isSuccess)
+            {
+                Debug.Log("You success!");
+            }
+            else
+            {
+                Debug.Log("You failed!");
+            }
             state = State.IDLE;
         }
         else
@@ -127,14 +137,25 @@ public class GameManager : SingletonBehaviour<GameManager> {
 
     public void checkResult()
     {
-
+        for (int i = 0; i < map.GetLength(0); i++)
+        {
+            for (int j = 0; j < map.GetLength(1); ++j)
+            {
+                if (!map[i,j].IsTissueReceived)
+                {
+                    isSuccess = false;
+                    return;
+                }
+            }
+        }
+        isSuccess = true;
     }
 
-    public People[,] getMap()
+    public PassPeople[,] getMap()
     {
         return map;
     }
-    public void setMap(People[,] newmap)
+    public void setMap(PassPeople[,] newmap)
     {
         map = newmap;
     }

@@ -10,7 +10,7 @@ public enum People {
 
 public class PassPeople : MonoBehaviour{
 
-    bool IsTissueReceived;
+    public bool IsTissueReceived;
     public bool IsPinned;
     Vector2 IdentityLocation;
     People people;
@@ -50,5 +50,9 @@ public class PassPeople : MonoBehaviour{
             }
         }
         GameManager.Inst().setTissueMap(tempTissueMap);
+    }
+    public People getPeople()
+    {
+        return people;
     }
 }
