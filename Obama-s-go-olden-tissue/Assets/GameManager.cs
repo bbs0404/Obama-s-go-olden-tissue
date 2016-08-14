@@ -19,6 +19,9 @@ public class GameManager : SingletonBehaviour<GameManager> {
     private bool[,] tissueMap;
     private bool[,] preTissueMap;
     private PassPeople MovingPeople = null;
+    private bool MoveFinished = false;
+    [SerializeField]
+    private List<PassPeople> MovingPeopleList;
 
     private State state
     {
@@ -30,6 +33,13 @@ public class GameManager : SingletonBehaviour<GameManager> {
         {
             state = value;
         }
+    }
+    void Start()
+    {
+        updateTime = 0.5f;
+        objectList = null;
+        MovingPeople = null;
+        MoveFinished = false;
     }
 
     void Update()
@@ -149,5 +159,17 @@ public class GameManager : SingletonBehaviour<GameManager> {
     }
     public void setMovingPeople(PassPeople newPeople) {
         MovingPeople = newPeople;
+    }
+    public bool isMoveFinished()
+    {
+        return MoveFinished;
+    }
+    public void setMoveFinished(bool isFinished)
+    {
+        MoveFinished = isFinished;
+    }
+    public List<PassPeople> getMovingPeopleList()
+    {
+        return MovingPeopleList;
     }
 }

@@ -27,10 +27,17 @@ public class PassPeople : MonoBehaviour{
             }
         }
         if(GameManager.Inst().getState() == State.MOVING) {
-            if(this.people == People.NONE) {
+            if(this.people == People.NONE && GameManager.Inst().getMovingPeopleList().Contains(this)) {
                 this.people = GameManager.Inst().getMovingPeople().people;
                 GameManager.Inst().setState(State.IDLE);
+                GameManager.Inst().getMovingPeopleList().Remove(this);
+                if(GameManager.Inst().getMovingPeopleList().Count <= 0)
+                {
+                    GameManager.Inst().setMoveFinished(true);
+                }
+                Destroy(this);
             }
+            GameManager.Inst().mapUpdate();
         }
     }
     public void PassTissue() { // 티슈를 받았을 때 넘기는 행동
