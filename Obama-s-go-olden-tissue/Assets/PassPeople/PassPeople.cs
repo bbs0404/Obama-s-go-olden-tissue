@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public enum People {
     EMPTY,
     NONE,
@@ -10,11 +10,11 @@ public enum People {
 
 public class PassPeople : MonoBehaviour{
 
-    bool IsTissueReceived;
+    public bool IsTissueReceived;
     public bool IsPinned;
     Vector2 IdentityLocation;
     People people;
-    ArrayList PassLocation = new ArrayList(); // 각 하위 클래스 start에서 이거 채워 넣어야 함(vector 2)
+    public List<Vector2> PassLocation = new List<Vector2>(); // 각 하위 클래스 start에서 이거 채워 넣어야 함(vector 2)
     // Use this for initialization
     void Start() {
         IsTissueReceived = false;
