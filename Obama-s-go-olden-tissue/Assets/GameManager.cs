@@ -411,9 +411,32 @@ public class GameManager : SingletonBehaviour<GameManager> {
                                     image.sprite = characters[((int)map[i, j].getPeople() - 2) * 2 + 1];
                                     images[0].color = new Color(230f / 255f, 181f / 255f, 78f / 255f);
                                 }
-                                else
-                                    image.sprite = characters[((int)map[i, j].getPeople() - 2) * 2];
-                                break;
+                            else {
+                                image.sprite = characters[((int)map[i, j].getPeople() - 2) * 2];
+                                switch(mapdata[i, j]) {
+                                    case People.WHITEFEMALE:
+                                    images[0].color = new Color(19f / 255f, 105f / 255f, 164f / 255f, 0.5f);
+                                    break;
+                                    case People.ASIANMALE:
+                                    images[0].color = new Color(135f / 255f, 179f / 255f, 64f / 255f, 0.5f);
+                                    break;
+                                    case People.LATINFEMALE:
+                                    images[0].color = new Color(101f / 255f, 73f / 255f, 121f / 255f, 0.5f);
+                                    break;
+                                    case People.ARABMALE:
+                                    images[0].color = new Color(47f / 255f, 121f / 255f, 60f / 255f, 0.5f);
+                                    break;
+                                    case People.KOREANFEMALE:
+                                    images[0].color = new Color(255f / 255f, 142f / 255f, 175f / 255f, 0.5f);
+                                    break;
+                                    case People.BLACKMALE:
+                                    images[0].color = new Color(255f / 255f, 158f / 255f, 87f / 255f, 0.5f);
+                                    break;
+                                    default:
+                                    break;
+                                }
+                            }
+                            break;
                         }
                     }
                 }
