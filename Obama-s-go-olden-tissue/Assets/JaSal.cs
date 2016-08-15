@@ -22,7 +22,8 @@ public class JaSal : MonoBehaviour {
                         GameManager.Inst().getMapData()[(int)tmpvecor.x, (int)tmpvecor.y] = People.ARABMALE;
                         GameManager.Inst().getMap()[(int)tmpvecor.x, (int)tmpvecor.y] = p;
                         p.setPeople(People.ARABMALE);
-                        break;
+                        objects[0].color = new Color(47f / 255f, 121f / 255f, 60f / 255f, 0.5f);
+                    break;
                     }
                 case People.ASIANMALE:
                     {
@@ -34,7 +35,8 @@ public class JaSal : MonoBehaviour {
                         GameManager.Inst().getMapData()[(int)tmpvecor.x, (int)tmpvecor.y] = People.ASIANMALE;
                         GameManager.Inst().getMap()[(int)tmpvecor.x, (int)tmpvecor.y] = p;
                         p.setPeople(People.ASIANMALE);
-                        break;
+                        objects[0].color = new Color(135f / 255f, 179f / 255f, 64f / 255f, 0.5f);
+                    break;
                     }
                 case People.BLACKMALE:
                     {
@@ -46,7 +48,8 @@ public class JaSal : MonoBehaviour {
                         GameManager.Inst().getMapData()[(int)tmpvecor.x, (int)tmpvecor.y] = People.BLACKMALE;
                         GameManager.Inst().getMap()[(int)tmpvecor.x, (int)tmpvecor.y] = p;
                         p.setPeople(People.BLACKMALE);
-                        break;
+                        objects[0].color = new Color(255f / 255f, 158f / 255f, 87f / 255f, 0.5f);
+                    break;
                     }
                 case People.KOREANFEMALE:
                     {
@@ -58,7 +61,8 @@ public class JaSal : MonoBehaviour {
                         GameManager.Inst().getMapData()[(int)tmpvecor.x, (int)tmpvecor.y] = People.KOREANFEMALE;
                         GameManager.Inst().getMap()[(int)tmpvecor.x, (int)tmpvecor.y] = p;
                         p.setPeople(People.KOREANFEMALE);
-                        break;
+                        objects[0].color = new Color(255f / 255f, 142f / 255f, 175f / 255f, 0.5f);
+                    break;
                     }
                 case People.LATINFEMALE:
                     {
@@ -70,7 +74,8 @@ public class JaSal : MonoBehaviour {
                         GameManager.Inst().getMapData()[(int)tmpvecor.x, (int)tmpvecor.y] = People.LATINFEMALE;
                         GameManager.Inst().getMap()[(int)tmpvecor.x, (int)tmpvecor.y] = p;
                         p.setPeople(People.LATINFEMALE);
-                        break;
+                        objects[0].color = new Color(101f / 255f, 73f / 255f, 121f / 255f, 0.5f);
+                    break;
                     }
                 case People.WHITEFEMALE:
                     {
@@ -82,7 +87,8 @@ public class JaSal : MonoBehaviour {
                         GameManager.Inst().getMapData()[(int)tmpvecor.x, (int)tmpvecor.y] = People.WHITEFEMALE;
                         GameManager.Inst().getMap()[(int)tmpvecor.x, (int)tmpvecor.y] = p;
                         p.setPeople(People.WHITEFEMALE);
-                        break;
+                        objects[0].color = new Color(19f / 255f, 105f / 255f, 164f / 255f, 0.5f);
+                    break;
                     }
             }
             --GameManager.Inst().getSelectionNum()[(int)GameManager.Inst().getMovingPeople().getPeople() - 2];
