@@ -16,13 +16,16 @@ public class GameManager : SingletonBehaviour<GameManager> {
     [SerializeField]
     private AudioSource BGM;
     [SerializeField]
-<<<<<<< HEAD
+//<<<<<<< HEAD
     private AudioClip Yeah;
-=======
+    //=======
+    [SerializeField]
+    private AudioSource EffectSound;
+    [SerializeField]
     private AudioSource[] Voice;
     [SerializeField]
     private AudioClip Win;
->>>>>>> master
+//>>>>>>> master
     [SerializeField]
     private AudioClip foo;
     [SerializeField]
@@ -61,10 +64,10 @@ public class GameManager : SingletonBehaviour<GameManager> {
             BGM.Stop();
 
         SoundManager.Inst().playAudio(BGM);
-<<<<<<< HEAD
-=======
+//<<<<<<< HEAD
+//=======
 
->>>>>>> master
+//>>>>>>> master
         updateTime = 0f;
         objectList = null;
         MovingPeople = null;
@@ -488,6 +491,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
 
     private void updateTurn()
     {
+        EffectSound.Play();
         for (int i = 0; i < map.GetLength(0); i++)
         {
             for (int j = 0; j < map.GetLength(1); ++j)
@@ -516,11 +520,11 @@ public class GameManager : SingletonBehaviour<GameManager> {
             if (isSuccess)
             {
                 InputManager.Inst().Success();
-<<<<<<< HEAD
+//<<<<<<< HEAD
                 SoundManager.Inst().changeBGM(Yeah);
-=======
+//=======
                 SoundManager.Inst().changeBGM(Win);
->>>>>>> master
+//>>>>>>> master
                 SoundManager.Inst().playAudio(BGM);
                 Debug.Log("You success!");
             }
