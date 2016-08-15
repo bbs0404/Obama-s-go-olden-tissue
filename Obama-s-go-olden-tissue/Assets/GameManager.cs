@@ -16,6 +16,10 @@ public class GameManager : SingletonBehaviour<GameManager> {
     [SerializeField]
     private AudioSource BGM;
     [SerializeField]
+    private AudioSource[] Voice;
+    [SerializeField]
+    private AudioClip Win;
+    [SerializeField]
     private AudioClip foo;
     [SerializeField]
     private Canvas gameCanvas;
@@ -51,6 +55,9 @@ public class GameManager : SingletonBehaviour<GameManager> {
     {
         if (BGM!=null)
             BGM.Stop();
+
+        SoundManager.Inst().playAudio(BGM);
+
         updateTime = 0f;
         objectList = null;
         MovingPeople = null;
@@ -479,6 +486,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
             if (isSuccess)
             {
                 InputManager.Inst().Success();
+                SoundManager.Inst().changeBGM(Win);
                 SoundManager.Inst().playAudio(BGM);
                 Debug.Log("You success!");
             }
@@ -524,6 +532,36 @@ public class GameManager : SingletonBehaviour<GameManager> {
             }
         }
         isSuccess = true;
+    }
+
+    public void VoiceOutput(int i,int j)
+    {
+        switch (mapdata[i, j])
+        {
+            case People.NONE:
+
+                break;
+            case People.ARABMALE:
+
+                Voice[0].Play();
+
+                break;
+            case People.ASIANMALE:
+                Voice[1].Play();
+                break;
+            case People.BLACKMALE:
+                Voice[2].Play();
+                break;
+            case People.KOREANFEMALE:
+                Voice[3].Play();
+                break;
+            case People.LATINFEMALE:
+                Voice[4].Play();
+                break;
+            case People.WHITEFEMALE:
+                Voice[5].Play();
+                break;
+        }
     }
 
     public PassPeople[,] getMap()

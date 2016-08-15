@@ -94,6 +94,7 @@ public class JaSal : MonoBehaviour {
             Image[] objects = button.GetComponentsInChildren<Image>();
             GameManager.Inst().getTissueMap()[(int)objects[1].gameObject.transform.parent.GetComponent<PassPeople>().IdentityLocation.x, (int)objects[1].gameObject.transform.parent.GetComponent<PassPeople>().IdentityLocation.y] = true;
             GameManager.Inst().setState(State.SIMULATING);
+            GameManager.Inst().VoiceOutput((int)objects[1].gameObject.transform.parent.GetComponent<PassPeople>().IdentityLocation.x, (int)objects[1].gameObject.transform.parent.GetComponent<PassPeople>().IdentityLocation.y);
         }
     }
 }
