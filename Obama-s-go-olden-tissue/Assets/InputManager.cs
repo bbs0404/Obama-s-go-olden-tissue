@@ -26,6 +26,9 @@ public class InputManager : SingletonBehaviour<InputManager> {
 	private int mapSize;
 	private PassPeople[,] map;
 
+	public int mapX;
+	public int mapY;
+
     [SerializeField]
     private AudioSource knock;
 
@@ -35,6 +38,7 @@ public class InputManager : SingletonBehaviour<InputManager> {
 		unlockedSprite = Resources.Load <Sprite> ("stage/unlocked");
 		backSprite = Resources.Load <Sprite> ("in-game/backimage");
 		resetSprite = Resources.Load <Sprite> ("in-game/resetimage");
+		
 		for(int i=0;i<6;i++){
 			levelDoors[i] = GameObject.Find("DoorButton" + (i+1).ToString());
 		}
@@ -117,14 +121,22 @@ public class InputManager : SingletonBehaviour<InputManager> {
 			if(i+levelBase > levelLimit){
 				levelDoors[i].transform.Find("Text").GetComponent<Text>().text = "";
 				levelDoors[i].GetComponent<Image>().sprite = lockedSprite;
+				levelDoors[i].GetComponent<Button>().onClick.RemoveAllListeners();
 			}
 			else{
 				levelDoors[i].transform.Find("Text").GetComponent<Text>().text = (i+levelBase).ToString();
-				levelDoors[i].GetComponent<Image>().sprite = unlockedSprite;
+				if(GameManager.Inst().getStageSuccessList()[i+levelBase]){
+					levelDoors[i].GetComponent<Image>().sprite = unlockedSprite;
+					levelDoors[i].GetComponent<Button>().onClick.RemoveAllListeners();
+					int tempInt = i+levelBase;
+					levelDoors[i].GetComponent<Button>().onClick.AddListener(() => GoToStage(tempInt));
+				}
+				else{
+					levelDoors[i].GetComponent<Image>().sprite = lockedSprite;
+					levelDoors[i].GetComponent<Button>().onClick.RemoveAllListeners();
+				}
+					
 			}
-			levelDoors[i].GetComponent<Button>().onClick.RemoveAllListeners();
-			int tempInt = i+levelBase;
-			levelDoors[i].GetComponent<Button>().onClick.AddListener(() => GoToStage(tempInt));
 		}
 		// Show the Left button or not
 		if(levelBase == 1)
@@ -147,7 +159,7 @@ public class InputManager : SingletonBehaviour<InputManager> {
 
 
 	public void Update(){
-		if(System.String.Compare(Application.loadedLevelName, "Title Scene", false) == 0){
+		if(System.String.Compare(SceneManager.GetActiveScene().name, "Title Scene", false) == 0){
 			GameObject temp = GameObject.Find("TitlePaper");
 			if(temp != null){
 				accuTime += Time.deltaTime;
@@ -158,10 +170,12 @@ public class InputManager : SingletonBehaviour<InputManager> {
 				temp.transform.localScale = new Vector3(tempScale, tempScale, tempScale);
 			}
 		}
-		else if(System.String.Compare(Application.loadedLevelName, "Main Scene", false) == 0){
+		else if(System.String.Compare(SceneManager.GetActiveScene().name, "Main Scene", false) == 0){
 			if(map != null){
-				int mapX = (int)((Input.mousePosition.x-20.0f) / (680f / map.GetLength(0)));
-				int mapY = (int)((720.0f - Input.mousePosition.x) / (680f / map.GetLength(0)));
+				//int mapX = (int)((Input.mousePosition.x-20.0f) / (680f / map.GetLength(0)));
+				//int mapY = (int)((720.0f - Input.mousePosition.x) / (680f / map.GetLength(0)));
+				mapX = (int)((Input.mousePosition.x-20.0f) / (680f / map.GetLength(0)));
+				mapY = (int)((720.0f - Input.mousePosition.y) / (680f / map.GetLength(0)));
 				PassPeople movingPeople = GameManager.Inst().getMovingPeople();
 				for(int i=0; i<mapSize; i++){
 					for(int j=0;j<mapSize;j++){
@@ -169,8 +183,10 @@ public class InputManager : SingletonBehaviour<InputManager> {
 					}
 				}
 				if(mapX >= 0 && mapX < mapSize && mapY >= 0 && mapY < mapSize
-					&& map[mapX,mapY] != null && movingPeople != null){
-					foreach(var item in movingPeople.PassLocation){
+					&& map[mapX,mapY] != null && map[mapX,mapY] != null){
+					foreach(var item in map[mapX,mapY].PassLocation){
+						/*&& map[mapX,mapY] != null && movingPeople != null){
+					foreach(var item in movingPeople.PassLocation){*/
 						if((int)item.x + mapX >= 0 && (int)item.x + mapX < mapSize &&
 							(int)item.y + mapY >= 0 && (int)item.y + mapY < mapSize &&
 							map[(int)item.x + mapX,(int)item.y + mapY] != null)
@@ -309,6 +325,8 @@ public class InputManager : SingletonBehaviour<InputManager> {
 		foreach( Button iterator in canvasButtons){
 			iterator.interactable = false;
 		}
+		if(GameManager.Inst().getStage()+1 <= levelLimit)
+			GameManager.Inst().setStageCleared(GameManager.Inst().getStage()+1);
 		successFlag = true;
 	}
     public void OnSelectionButtonClicked(Button button)

@@ -15,7 +15,7 @@ public class JaSal : MonoBehaviour {
                 case People.ARABMALE:
                     {
                         Vector2 tmpvecor = objects[0].GetComponent<PassPeople>().IdentityLocation;
-                        bool tmpbool = objects[0].GetComponent<PassPeople>().IsTissueReceived;
+                        //bool tmpbool = objects[0].GetComponent<PassPeople>().IsTissueReceived;
                         Destroy(objects[0].gameObject.GetComponent<PassPeople>());
                         PassPeople1 p = objects[0].gameObject.AddComponent<PassPeople1>();
                         p.IdentityLocation = tmpvecor;
@@ -27,7 +27,7 @@ public class JaSal : MonoBehaviour {
                 case People.ASIANMALE:
                     {
                         Vector2 tmpvecor = objects[0].GetComponent<PassPeople>().IdentityLocation;
-                        bool tmpbool = objects[0].GetComponent<PassPeople>().IsTissueReceived;
+                        //bool tmpbool = objects[0].GetComponent<PassPeople>().IsTissueReceived;
                         Destroy(objects[0].gameObject.GetComponent<PassPeople>());
                         PassPeople5 p = objects[0].gameObject.AddComponent<PassPeople5>();
                         p.IdentityLocation = tmpvecor;
@@ -39,7 +39,7 @@ public class JaSal : MonoBehaviour {
                 case People.BLACKMALE:
                     {
                         Vector2 tmpvecor = objects[0].GetComponent<PassPeople>().IdentityLocation;
-                        bool tmpbool = objects[0].GetComponent<PassPeople>().IsTissueReceived;
+                        //bool tmpbool = objects[0].GetComponent<PassPeople>().IsTissueReceived;
                         Destroy(objects[0].gameObject.GetComponent<PassPeople>());
                         PassPeople4 p = objects[0].gameObject.AddComponent<PassPeople4>();
                         p.IdentityLocation = tmpvecor;
@@ -51,7 +51,7 @@ public class JaSal : MonoBehaviour {
                 case People.KOREANFEMALE:
                     {
                         Vector2 tmpvecor = objects[0].GetComponent<PassPeople>().IdentityLocation;
-                        bool tmpbool = objects[0].GetComponent<PassPeople>().IsTissueReceived;
+                        //bool tmpbool = objects[0].GetComponent<PassPeople>().IsTissueReceived;
                         Destroy(objects[0].gameObject.GetComponent<PassPeople>());
                         PassPeople3 p = objects[0].gameObject.AddComponent<PassPeople3>();
                         p.IdentityLocation = tmpvecor;
@@ -63,7 +63,7 @@ public class JaSal : MonoBehaviour {
                 case People.LATINFEMALE:
                     {
                         Vector2 tmpvecor = objects[0].GetComponent<PassPeople>().IdentityLocation;
-                        bool tmpbool = objects[0].GetComponent<PassPeople>().IsTissueReceived;
+                        //bool tmpbool = objects[0].GetComponent<PassPeople>().IsTissueReceived;
                         Destroy(objects[0].gameObject.GetComponent<PassPeople>());
                         PassPeople6 p = objects[0].gameObject.AddComponent<PassPeople6>();
                         p.IdentityLocation = tmpvecor;
@@ -75,7 +75,7 @@ public class JaSal : MonoBehaviour {
                 case People.WHITEFEMALE:
                     {
                         Vector2 tmpvecor = objects[0].GetComponent<PassPeople>().IdentityLocation;
-                        bool tmpbool = objects[0].GetComponent<PassPeople>().IsTissueReceived;
+                        //bool tmpbool = objects[0].GetComponent<PassPeople>().IsTissueReceived;
                         Destroy(objects[0].gameObject.GetComponent<PassPeople>());
                         PassPeople2 p = objects[0].gameObject.AddComponent<PassPeople2>();
                         p.IdentityLocation = tmpvecor;
