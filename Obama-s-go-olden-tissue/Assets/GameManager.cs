@@ -16,6 +16,8 @@ public class GameManager : SingletonBehaviour<GameManager> {
     [SerializeField]
     private AudioSource BGM;
     [SerializeField]
+    private AudioClip Yeah;
+    [SerializeField]
     private AudioClip foo;
     [SerializeField]
     private Canvas gameCanvas;
@@ -51,6 +53,8 @@ public class GameManager : SingletonBehaviour<GameManager> {
     {
         if (BGM!=null)
             BGM.Stop();
+
+        SoundManager.Inst().playAudio(BGM);
         updateTime = 0f;
         objectList = null;
         MovingPeople = null;
@@ -479,6 +483,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
             if (isSuccess)
             {
                 InputManager.Inst().Success();
+                SoundManager.Inst().changeBGM(Yeah);
                 SoundManager.Inst().playAudio(BGM);
                 Debug.Log("You success!");
             }

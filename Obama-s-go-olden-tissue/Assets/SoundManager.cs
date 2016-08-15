@@ -46,6 +46,7 @@ public class SoundManager : SingletonBehaviour<SoundManager> {
     public void changeBGM(AudioClip newBGM)
     {
         BGM.clip = newBGM;
+        BGM.loop = false;
     }
 
     public void setSFX_Volume(float volume)
