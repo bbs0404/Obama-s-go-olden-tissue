@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class InputManager : SingletonBehaviour<InputManager> {
 
+
 	public GameObject popUpInstance;
 	private float accuTime = 0.0f;
 	private bool failedFlag = false;
@@ -336,7 +337,7 @@ public class InputManager : SingletonBehaviour<InputManager> {
         else
         {
             GameManager.Inst().setStage(level);
-            SceneManager.LoadScene("MainScene");
+            SceneManager.LoadScene("Main Scene");
         }
     }
 

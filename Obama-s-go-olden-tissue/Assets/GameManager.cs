@@ -13,11 +13,14 @@ public enum State
 
 public class GameManager : SingletonBehaviour<GameManager> {
     [SerializeField]
+    private AudioSource BGM;
+    [SerializeField]
+    private AudioClip foo;
+    [SerializeField]
     private Canvas gameCanvas;
     [SerializeField]
     private float updateTime = 0.5f;
-    [SerializeField]
-    private int stage = 0;
+    private static int stage;
     [SerializeField]
     private List<GameObject> objectList = null;
     [SerializeField]
@@ -42,9 +45,10 @@ public class GameManager : SingletonBehaviour<GameManager> {
     [SerializeField]
     private Text[] selectionText = new Text[6];
 
-
     void Start()
     {
+        if (BGM!=null)
+            BGM.Stop();
         updateTime = 0f;
         objectList = null;
         MovingPeople = null;
@@ -65,10 +69,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
             selectionNum[3] = 0;
             selectionNum[4] = 0;
             selectionNum[5] = 0;
-            for (int i = 0; i < 6; ++i)
-            {
-                selectionText[i].text = ": " + selectionNum[i].ToString();
-            }
+
             mapUpdate();
         }
 
@@ -91,10 +92,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
                 selectionNum[3] = 0;
                 selectionNum[4] = 1;
                 selectionNum[5] = 0;
-                for (int i = 0; i < 6; ++i)
-                {
-                    selectionText[i].text = ": " + selectionNum[i].ToString();
-                }
+
                 mapUpdate();
                 break;
             case 2:
@@ -114,10 +112,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
                 selectionNum[3] = 0;
                 selectionNum[4] = 1;
                 selectionNum[5] = 0;
-                for (int i = 0; i < 6; ++i)
-                {
-                    selectionText[i].text = ": " + selectionNum[i].ToString();
-                }
+
                 mapUpdate();
                 break;
             case 3:
@@ -137,10 +132,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
                 selectionNum[3] = 0;
                 selectionNum[4] = 1;
                 selectionNum[5] = 1;
-                for (int i = 0; i < 6; ++i)
-                {
-                    selectionText[i].text = ": " + selectionNum[i].ToString();
-                }
+
                 mapUpdate();
                 break;
             case 4:
@@ -162,10 +154,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
                 selectionNum[3] = 0;
                 selectionNum[4] = 1;
                 selectionNum[5] = 0;
-                for (int i = 0; i < 6; ++i)
-                {
-                    selectionText[i].text = ": " + selectionNum[i].ToString();
-                }
+
                 mapUpdate();
                 break;
             case 5:
@@ -187,10 +176,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
                 selectionNum[3] = 0;
                 selectionNum[4] = 0;
                 selectionNum[5] = 2;
-                for (int i = 0; i < 6; ++i)
-                {
-                    selectionText[i].text = ": " + selectionNum[i].ToString();
-                }
+
                 mapUpdate();
                 break;
             case 6:
@@ -211,10 +197,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
                 selectionNum[3] = 0;
                 selectionNum[4] = 1;
                 selectionNum[5] = 0;
-                for (int i = 0; i < 6; ++i)
-                {
-                    selectionText[i].text = ": " + selectionNum[i].ToString();
-                }
+
                 mapUpdate();
                 break;
             case 7:
@@ -315,16 +298,14 @@ public class GameManager : SingletonBehaviour<GameManager> {
                 mapUpdate();
                 break;
 
-
         }
-
-
 
 
     }
 
     void Update()
     {
+        Debug.Log(stage);
         if (state == State.SIMULATING)
         {
             if (updateTime > 0)
@@ -354,7 +335,8 @@ public class GameManager : SingletonBehaviour<GameManager> {
     {
         for (int i = 0; i < 6; ++i)
         {
-            selectionText[i].text = ": " + selectionNum[i].ToString();
+            if (selectionText[i] != null)
+                selectionText[i].text = ": " + selectionNum[i].ToString();
         }
         if (objectList == null)
         {
@@ -363,7 +345,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
             {
                 for (int j = 0; j < mapdata.GetLength(1); ++j)
                 {
-                    if (mapdata[i, j] != People.EMPTY)
+                    if (mapdata[i, j] != People.EMPTY && objectPrefabs[0] != null)
                     {
                         GameObject tmp = Instantiate(objectPrefabs[0]);
                         if (!objectList.Contains(tmp))
@@ -487,10 +469,14 @@ public class GameManager : SingletonBehaviour<GameManager> {
             if (isSuccess)
             {
                 InputManager.Inst().Success();
+                SoundManager.Inst().playAudio(BGM);
                 Debug.Log("You success!");
             }
             else
             {
+                InputManager.Inst().Failed();
+                SoundManager.Inst().changeBGM(foo);
+                SoundManager.Inst().playAudio(BGM);
                 Debug.Log("You failed!");
             }
             state = State.IDLE;
@@ -516,8 +502,10 @@ public class GameManager : SingletonBehaviour<GameManager> {
     {
         for (int i = 0; i < map.GetLength(0); i++)
         {
-            for (int j = 0; j < map.GetLength(1) && map[i,j] != null && map[i,j].getPeople() != People.NONE; ++j)
+            for (int j = 0; j < map.GetLength(1); ++j)
             {
+                if (map[i, j] == null || map[i, j].getPeople() == People.NONE)
+                    continue;
                 if (!map[i,j].IsTissueReceived)
                 {
                     isSuccess = false;
