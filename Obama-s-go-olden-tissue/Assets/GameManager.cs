@@ -194,8 +194,8 @@ public class GameManager : SingletonBehaviour<GameManager> {
                     mapdata[0, 1] = People.EMPTY; mapdata[1, 1] = People.NONE; mapdata[2, 1] = People.ARABMALE; mapdata[3, 1] = People.NONE; mapdata[4, 1] = People.EMPTY; mapdata[5, 1] = People.ASIANMALE; mapdata[6, 1] = People.EMPTY;
                     mapdata[0, 2] = People.NONE; mapdata[1, 2] = People.ARABMALE; mapdata[2, 2] = People.NONE; mapdata[3, 2] = People.ARABMALE; mapdata[4, 2] = People.EMPTY; mapdata[5, 2] = People.ARABMALE; mapdata[6, 2] = People.EMPTY;
                     mapdata[0, 3] = People.EMPTY; mapdata[1, 3] = People.EMPTY; mapdata[2, 3] = People.ASIANMALE; mapdata[3, 3] = People.ARABMALE; mapdata[4, 3] = People.NONE; mapdata[5, 3] = People.BLACKMALE; mapdata[6, 3] = People.EMPTY;
-                    mapdata[0, 4] = People.ARABMALE; mapdata[1, 4] = People.NONE; mapdata[2, 4] = People.BLACKMALE; mapdata[3, 4] = People.EMPTY; mapdata[4, 4] = People.EMPTY; mapdata[5, 4] = People.EMPTY; mapdata[6, 4] = People.EMPTY;
-                    mapdata[0, 5] = People.EMPTY; mapdata[1, 5] = People.EMPTY; mapdata[2, 5] = People.EMPTY; mapdata[3, 5] = People.ARABMALE; mapdata[4, 5] = People.EMPTY; mapdata[5, 5] = People.ARABMALE; mapdata[6, 5] = People.EMPTY;
+                    mapdata[0, 4] = People.ARABMALE; mapdata[1, 4] = People.NONE; mapdata[2, 4] = People.BLACKMALE; mapdata[3, 4] = People.NONE; mapdata[4, 4] = People.NONE; mapdata[5, 4] = People.EMPTY; mapdata[6, 4] = People.EMPTY;
+                    mapdata[0, 5] = People.EMPTY; mapdata[1, 5] = People.EMPTY; mapdata[2, 5] = People.EMPTY; mapdata[3, 5] = People.ARABMALE; mapdata[4, 5] = People.NONE; mapdata[5, 5] = People.ARABMALE; mapdata[6, 5] = People.EMPTY;
                     mapdata[0, 6] = People.EMPTY; mapdata[1, 6] = People.EMPTY; mapdata[2, 6] = People.ARABMALE; mapdata[3, 6] = People.EMPTY; mapdata[4, 6] = People.EMPTY; mapdata[5, 6] = People.EMPTY; mapdata[6, 6] = People.EMPTY;
 
                     selectionNum[0] = 0;
@@ -237,10 +237,10 @@ public class GameManager : SingletonBehaviour<GameManager> {
                     setSizeOfMap(7);
 
                     mapdata[0, 0] = People.EMPTY; mapdata[1, 0] = People.NONE; mapdata[2, 0] = People.ARABMALE; mapdata[3, 0] = People.EMPTY; mapdata[4, 0] = People.EMPTY; mapdata[5, 0] = People.EMPTY; mapdata[6, 0] = People.EMPTY;
-                    mapdata[0, 1] = People.EMPTY; mapdata[1, 1] = People.NONE; mapdata[2, 1] = People.NONE; mapdata[3, 1] = People.NONE; mapdata[4, 1] = People.ARABMALE; mapdata[5, 1] = People.EMPTY; mapdata[6, 1] = People.EMPTY;
-                    mapdata[0, 2] = People.ARABMALE; mapdata[1, 2] = People.NONE; mapdata[2, 2] = People.BLACKMALE; mapdata[3, 2] = People.ARABMALE; mapdata[4, 2] = People.NONE; mapdata[5, 2] = People.EMPTY; mapdata[6, 2] = People.EMPTY;
-                    mapdata[0, 3] = People.ARABMALE; mapdata[1, 3] = People.NONE; mapdata[2, 3] = People.ARABMALE; mapdata[3, 3] = People.NONE; mapdata[4, 3] = People.WHITEFEMALE; mapdata[5, 3] = People.NONE; mapdata[6, 3] = People.EMPTY;
-                    mapdata[0, 4] = People.EMPTY; mapdata[1, 4] = People.NONE; mapdata[2, 4] = People.NONE; mapdata[3, 4] = People.NONE; mapdata[4, 4] = People.NONE; mapdata[5, 4] = People.ASIANMALE; mapdata[6, 4] = People.EMPTY;
+                    mapdata[0, 1] = People.EMPTY; mapdata[1, 1] = People.NONE; mapdata[2, 1] = People.NONE; mapdata[3, 1] = People.NONE; mapdata[4, 1] = People.ARABMALE; mapdata[5, 1] = People.NONE; mapdata[6, 1] = People.EMPTY;
+                    mapdata[0, 2] = People.ARABMALE; mapdata[1, 2] = People.NONE; mapdata[2, 2] = People.ASIANMALE; mapdata[3, 2] = People.ARABMALE; mapdata[4, 2] = People.NONE; mapdata[5, 2] = People.NONE; mapdata[6, 2] = People.NONE;
+                    mapdata[0, 3] = People.ARABMALE; mapdata[1, 3] = People.NONE; mapdata[2, 3] = People.BLACKMALE; mapdata[3, 3] = People.NONE; mapdata[4, 3] = People.WHITEFEMALE; mapdata[5, 3] = People.NONE; mapdata[6, 3] = People.EMPTY;
+                    mapdata[0, 4] = People.EMPTY; mapdata[1, 4] = People.NONE; mapdata[2, 4] = People.ARABMALE; mapdata[3, 4] = People.NONE; mapdata[4, 4] = People.NONE; mapdata[5, 4] = People.ASIANMALE; mapdata[6, 4] = People.EMPTY;
                     mapdata[0, 5] = People.EMPTY; mapdata[1, 5] = People.EMPTY; mapdata[2, 5] = People.NONE; mapdata[3, 5] = People.EMPTY; mapdata[4, 5] = People.EMPTY; mapdata[5, 5] = People.ARABMALE; mapdata[6, 5] = People.EMPTY;
                     mapdata[0, 6] = People.EMPTY; mapdata[1, 6] = People.EMPTY; mapdata[2, 6] = People.EMPTY; mapdata[3, 6] = People.EMPTY; mapdata[4, 6] = People.EMPTY; mapdata[5, 6] = People.EMPTY; mapdata[6, 6] = People.EMPTY;
 
@@ -271,8 +271,8 @@ public class GameManager : SingletonBehaviour<GameManager> {
                     selectionNum[0] = 0;
                     selectionNum[1] = 1;
                     selectionNum[2] = 0;
-                    selectionNum[3] = 1;
-                    selectionNum[4] = 0;
+                    selectionNum[3] = 0;
+                    selectionNum[4] = 1;
                     selectionNum[5] = 1;
                     for (int i = 0; i < 6; ++i)
                     {

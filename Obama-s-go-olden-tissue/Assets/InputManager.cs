@@ -13,7 +13,7 @@ public class InputManager : SingletonBehaviour<InputManager> {
 	private int successState = 0;
 
 	private int levelBase = 1;
-	private int levelLimit = 10;
+	private int levelLimit = 9;
 	private GameObject[] levelDoors = new GameObject[6];
 	
 	public Sprite lockedSprite;
@@ -134,6 +134,8 @@ public class InputManager : SingletonBehaviour<InputManager> {
 				else{
 					levelDoors[i].GetComponent<Image>().sprite = lockedSprite;
 					levelDoors[i].GetComponent<Button>().onClick.RemoveAllListeners();
+					/*int tempInt = i+levelBase;
+					levelDoors[i].GetComponent<Button>().onClick.AddListener(() => GoToStage(tempInt));*/
 				}
 					
 			}
